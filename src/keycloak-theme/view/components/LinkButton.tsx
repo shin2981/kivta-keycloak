@@ -14,10 +14,10 @@ export function LinkButton({
   return (
     <a
       className={cn(
-        "text-sm text-[var(--kc-primary)] hover:underline focus:outline-none focus:underline",
+        "text-sm text-[var(--primary)] hover:text-[var(--primary-dark)] hover:underline focus:outline-none focus:underline",
         className
       )}
-      style={{ color: "var(--kc-primary, #3b82f6)" }}
+      style={{ color: "var(--primary)" }}
       {...props}
     >
       {children}

@@ -82,8 +82,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                   }
                   onChange={handleLanguageChange}
                   className={clsx(
-                    "rounded-md border border-slate-500 bg-slate-800/80 px-3 py-2 text-sm text-slate-200",
-                    "focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500",
+                    "rounded-md border border-[var(--border)] bg-[var(--bg-white)] px-3 py-2 text-sm text-[var(--text-main)]",
+                    "focus:border-[var(--primary)] focus:outline-none focus:ring-1 focus:ring-[var(--primary)]",
                     "min-w-[8rem] cursor-pointer"
                   )}
                 >

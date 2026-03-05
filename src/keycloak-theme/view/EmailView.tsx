@@ -17,10 +17,10 @@ export function EmailView({ kcContext, i18n }: EmailViewProps) {
   return (
     <AuthCard>
       <AuthHeader>{i18n.msgStr("emailVerifyTitle")}</AuthHeader>
-      <p className="mb-4 text-sm text-slate-300">
+      <p className="mb-4 text-sm text-[var(--text-main)]">
         {i18n.msg("emailVerifyInstruction1", email)}
       </p>
-      <p className="mb-4 text-sm text-slate-400">
+      <p className="mb-4 text-sm text-[var(--text-sub)]">
         {i18n.msgStr("emailVerifyInstruction2")}{" "}
         <LinkButton href={url.loginAction}>
           {i18n.msgStr("doClickHere")}

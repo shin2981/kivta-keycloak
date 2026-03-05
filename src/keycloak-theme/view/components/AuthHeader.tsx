@@ -8,7 +8,7 @@ interface AuthHeaderProps {
 export function AuthHeader({ children, className = "" }: AuthHeaderProps) {
   return (
     <header className={`mb-6 text-center ${className}`}>
-      <h1 className="text-xl font-semibold text-white">{children}</h1>
+      <h1 className="text-xl font-semibold text-[var(--text-main)]">{children}</h1>
     </header>
   );
 }

@@ -34,7 +34,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
           kcContext={kcContext}
           i18n={i18n}
           doUseDefaultCss={false}
-          bodyClassName="min-h-screen flex items-center justify-center bg-[#0F172A]"
+          bodyClassName="min-h-screen flex items-center justify-center bg-[var(--bg-body)]"
           headerNode={headerTitle}
         >
           <div className="flex min-h-screen items-center justify-center p-4">
@@ -48,7 +48,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
           kcContext={kcContext}
           i18n={i18n}
           doUseDefaultCss={false}
-          bodyClassName="min-h-screen flex items-center justify-center bg-[#0F172A]"
+          bodyClassName="min-h-screen flex items-center justify-center bg-[var(--bg-body)]"
           headerNode={headerTitle}
         >
           <div className="flex min-h-screen items-center justify-center p-4">
@@ -62,7 +62,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
           kcContext={kcContext}
           i18n={i18n}
           doUseDefaultCss={false}
-          bodyClassName="min-h-screen flex items-center justify-center bg-[#0F172A]"
+          bodyClassName="min-h-screen flex items-center justify-center bg-[var(--bg-body)]"
           headerNode={headerTitle}
         >
           <div className="flex min-h-screen items-center justify-center p-4">
@@ -76,7 +76,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
           kcContext={kcContext}
           i18n={i18n}
           doUseDefaultCss={false}
-          bodyClassName="min-h-screen flex items-center justify-center bg-[#0F172A]"
+          bodyClassName="min-h-screen flex items-center justify-center bg-[var(--bg-body)]"
           headerNode={headerTitle}
         >
           <div className="flex min-h-screen items-center justify-center p-4">

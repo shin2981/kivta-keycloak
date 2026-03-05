@@ -57,12 +57,12 @@ export function LoginView({ kcContext, i18n }: LoginViewProps) {
         />
         <div className="mb-4 flex items-center justify-between text-sm">
           {"rememberMe" in realm && realm.rememberMe && !kcContext.usernameHidden && (
-            <label className="flex items-center gap-2 text-slate-300">
+            <label className="flex items-center gap-2 text-[var(--text-sub)]">
               <input
                 type="checkbox"
                 name="rememberMe"
                 defaultChecked={!!login?.rememberMe}
-                className="rounded border-slate-500"
+                className="rounded border-[var(--border)]"
               />
               {i18n.msgStr("rememberMe")}
             </label>
@@ -77,7 +77,7 @@ export function LoginView({ kcContext, i18n }: LoginViewProps) {
       </form>
       <AuthFooter>
         {"registrationAllowed" in realm && realm.registrationAllowed && !kcContext.registrationDisabled && "registrationUrl" in url && (
-          <span className="text-slate-400">
+          <span className="text-[var(--text-sub)]">
             {i18n.msgStr("noAccount")}{" "}
             <LinkButton href={url.registrationUrl}>
               {i18n.msgStr("doRegister")}

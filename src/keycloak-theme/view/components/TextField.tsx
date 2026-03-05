@@ -16,7 +16,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       <div className={cn("mb-4", className)}>
         <label
           htmlFor={inputId}
-          className="mb-1.5 block text-sm font-medium text-slate-200"
+          className="mb-1.5 block text-sm font-medium text-[var(--text-main)]"
         >
           {label}
         </label>
@@ -24,19 +24,19 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           ref={ref}
           id={inputId}
           className={cn(
-            "w-full rounded-lg border bg-slate-800/50 px-3 py-2 text-white placeholder-slate-500 focus:border-[var(--kc-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--kc-primary)]",
-            error && "border-red-500 focus:border-red-500 focus:ring-red-500",
+            "w-full rounded-lg border border-[var(--border)] bg-[var(--bg-white)] px-3 py-2 text-[var(--text-main)] placeholder-[var(--text-sub)] focus:border-[var(--primary)] focus:outline-none focus:ring-1 focus:ring-[var(--primary)]",
+            error && "border-[var(--negative)] focus:border-[var(--negative)] focus:ring-[var(--negative)]",
             inputClassName
           )}
           style={{
-            borderColor: error ? undefined : "var(--kc-border, #334155)",
+            borderColor: error ? "var(--negative)" : undefined,
           }}
           aria-invalid={!!error}
           aria-describedby={error ? `${inputId}-error` : undefined}
           {...props}
         />
         {error && (
-          <p id={`${inputId}-error`} className="mt-1 text-sm text-red-400">
+          <p id={`${inputId}-error`} className="mt-1 text-sm text-[var(--negative)]">
             {error}
           </p>
         )}

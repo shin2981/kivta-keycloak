@@ -82,7 +82,7 @@ export function RegisterView({ kcContext, i18n }: RegisterViewProps) {
           error={messagesPerField.getFirstError("password-confirm")}
         />
         {globalError && (
-          <p className="mb-2 text-sm text-red-400">{globalError}</p>
+          <p className="mb-2 text-sm text-[var(--negative)]">{globalError}</p>
         )}
         <PrimaryButton>{i18n.msgStr("doRegister")}</PrimaryButton>
       </form>

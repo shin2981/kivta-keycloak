@@ -2,10 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* DESIGN.md 라이트 전용 토큰 (다크 모드 미사용) */
 :root {
-  --kc-primary: #3b82f6;
-  --kc-primary-foreground: #fff;
-  --kc-bg: #0f172a;
-  --kc-surface: #1e293b;
-  --kc-border: #334155;
+  --bg-body: #f4f6f9;
+  --bg-white: #ffffff;
+  --primary: #1e4f98;
+  --primary-dark: #163a70;
+  --text-main: #222222;
+  --text-sub: #666666;
+  --border: #d9d9d9;
+  --border-light: #e0e0e0;
+  --negative: #ee4445;
+
+  /* Keycloak 테마 변수 → DESIGN 토큰 매핑 */
+  --kc-primary: var(--primary);
+  --kc-primary-foreground: #ffffff;
+  --kc-bg: var(--bg-body);
+  --kc-surface: var(--bg-white);
+  --kc-border: var(--border);
+}
+
+@layer base {
+  html {
+    font-family: "Pretendard", sans-serif;
+    background: var(--bg-body);
+  }
+  body {
+    background: var(--bg-body);
+  }
 }

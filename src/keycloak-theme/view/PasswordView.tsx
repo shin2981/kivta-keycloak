@@ -26,7 +26,7 @@ export function PasswordView({ kcContext, i18n }: PasswordViewProps) {
   return (
     <AuthCard>
       <AuthHeader>{i18n.msgStr("emailForgotTitle")}</AuthHeader>
-      <p className="mb-4 text-sm text-slate-400">
+      <p className="mb-4 text-sm text-[var(--text-sub)]">
         {"duplicateEmailsAllowed" in realm && realm.duplicateEmailsAllowed
           ? i18n.msgStr("emailInstructionUsername")
           : i18n.msgStr("emailInstruction")}
