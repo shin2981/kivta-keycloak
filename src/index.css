@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --kc-primary: #3b82f6;
+  --kc-primary-foreground: #fff;
+  --kc-bg: #0f172a;
+  --kc-surface: #1e293b;
+  --kc-border: #334155;
+}

@@ -1,0 +1,60 @@
+import { forwardRef, useState } from "react";
+import { cn } from "../../lib/cn";
+
+export interface PasswordFieldProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "className" | "type"> {
+  label: string;
+  error?: string;
+  className?: string;
+  inputClassName?: string;
+}
+
+export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(
+  ({ label, error, className = "", inputClassName = "", id, ...props }, ref) => {
+    const [showPassword, setShowPassword] = useState(false);
+    const inputId = id ?? `password-${label.replace(/\s/g, "-").toLowerCase()}`;
+    return (
+      <div className={cn("mb-4", className)}>
+        <label
+          htmlFor={inputId}
+          className="mb-1.5 block text-sm font-medium text-slate-200"
+        >
+          {label}
+        </label>
+        <div className="relative">
+          <input
+            ref={ref}
+            id={inputId}
+            type={showPassword ? "text" : "password"}
+            className={cn(
+              "w-full rounded-lg border bg-slate-800/50 px-3 py-2 pr-10 text-white placeholder-slate-500 focus:border-[var(--kc-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--kc-primary)]",
+              error && "border-red-500 focus:border-red-500 focus:ring-red-500",
+              inputClassName
+            )}
+            style={{
+              borderColor: error ? undefined : "var(--kc-border, #334155)",
+            }}
+            aria-invalid={!!error}
+            aria-describedby={error ? `${inputId}-error` : undefined}
+            {...props}
+          />
+          <button
+            type="button"
+            tabIndex={-1}
+            className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-300"
+            onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? "🙈" : "👁"}
+          </button>
+        </div>
+        {error && (
+          <p id={`${inputId}-error`} className="mt-1 text-sm text-red-400">
+            {error}
+          </p>
+        )}
+      </div>
+    );
+  }
+);
+PasswordField.displayName = "PasswordField";
