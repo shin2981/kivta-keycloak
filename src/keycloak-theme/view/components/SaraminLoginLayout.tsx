@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { clsx } from "keycloakify/tools/clsx";
 import { loginMessagesKo } from "../../login/loginMessages";
 import logo from "../../assets/logo.png";
 
@@ -21,78 +22,84 @@ export function SaraminLoginLayout({
   infoNode,
 }: SaraminLoginLayoutProps) {
   return (
-    <div id="wrapper" className="content">
-      <div style={{ maxWidth: 400, margin: "0 auto" }}>
-        <div className="area_logo">
-          <span className="logo" aria-hidden>
-            {/* <SaraminLogoSvg /> */}
-            <img src={logo} alt="한국산업훈련협회" />
-          </span>
-        </div>
+    <div
+      id="wrapper"
+      className={clsx(
+        "w-full max-w-full px-4 pb-10 pt-6 md:max-w-[400px] md:mx-auto",
+        "border border-gray-200 rounded-lg",
+      )}
+    >
+      <div className="flex justify-center mb-6">
+        <span aria-hidden>
+          <img src={logo} alt="한국산업훈련협회" />
+        </span>
+      </div>
 
-        <ul className="tabList login_tab" role="tablist">
-          <li className="select">
-            <button
-              type="button"
-              className="inTab t_per t_on"
-              aria-selected="true"
-              role="tab"
-            >
-              {loginMessagesKo.individualMember}
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              className="inTab t_com"
-              aria-selected="false"
-              role="tab"
-            >
-              {loginMessagesKo.enterpriseMember}
-            </button>
-          </li>
-        </ul>
+      <div className="rounded-lg bg-saramin-surface p-4 md:p-6">
+        <div className="w-full">
+          {children}
 
-        <div className="login_content">
-          <div className="input_login_info">
-            {children}
-
-            <div className="extra_func">
-              {loginResetCredentialsUrl && (
-                <>
-                  <a href={loginResetCredentialsUrl}>
-                    {loginMessagesKo.findId}
-                  </a>
-                  <i aria-hidden>|</i>
-                  <a href={loginResetCredentialsUrl}>
-                    {loginMessagesKo.findPassword}
-                  </a>
-                  <i aria-hidden>|</i>
-                </>
-              )}
-              {registrationUrl && (
-                <a href={registrationUrl}>{loginMessagesKo.signUp}</a>
-              )}
-            </div>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-saramin-border-light pt-5 text-sm leading-[22px]">
+            {loginResetCredentialsUrl && (
+              <>
+                <a
+                  href={loginResetCredentialsUrl}
+                  className="text-saramin-text-sub no-underline hover:text-saramin-primary"
+                >
+                  {loginMessagesKo.findId}
+                </a>
+                <i
+                  aria-hidden
+                  className="mx-0.5 text-saramin-gray40 not-italic"
+                >
+                  |
+                </i>
+                <a
+                  href={loginResetCredentialsUrl}
+                  className="text-saramin-text-sub no-underline hover:text-saramin-primary"
+                >
+                  {loginMessagesKo.findPassword}
+                </a>
+                <i
+                  aria-hidden
+                  className="mx-0.5 text-saramin-gray40 not-italic"
+                >
+                  |
+                </i>
+              </>
+            )}
+            {registrationUrl && (
+              <a
+                href={registrationUrl}
+                className="text-saramin-text-sub no-underline hover:text-saramin-primary"
+              >
+                {loginMessagesKo.signUp}
+              </a>
+            )}
           </div>
-
-          {socialProvidersNode && (
-            <div className="social_login_box">
-              <div className="social_login_tit">
-                <p className="tit">{loginMessagesKo.socialLoginTitle}</p>
-              </div>
-              <ul className="social_login" id="wrap_social_login">
-                {socialProvidersNode}
-              </ul>
-            </div>
-          )}
-
-          {infoNode && (
-            <div id="kc-info" className="kcSignUpClass">
-              {infoNode}
-            </div>
-          )}
         </div>
+
+        {socialProvidersNode && (
+          <div className="mt-6 border-t border-saramin-border-light pt-6">
+            <div className="mb-4 text-center">
+              <p className="m-0 text-sm font-medium leading-snug text-saramin-text-sub before:mr-2 before:inline-block before:h-px before:w-10 before:align-middle before:bg-saramin-border-light before:content-[''] after:ml-2 after:inline-block after:h-px after:w-10 after:align-middle after:bg-saramin-border-light after:content-['']">
+                {loginMessagesKo.socialLoginTitle}
+              </p>
+            </div>
+            <ul
+              className="flex flex-wrap justify-center gap-3 list-none p-0 m-0"
+              id="wrap_social_login"
+            >
+              {socialProvidersNode}
+            </ul>
+          </div>
+        )}
+
+        {infoNode && (
+          <div id="kc-info" className="kcSignUpClass">
+            {infoNode}
+          </div>
+        )}
       </div>
     </div>
   );

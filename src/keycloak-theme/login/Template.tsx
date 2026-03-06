@@ -288,7 +288,12 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
   /** 모바일 공통: 헤더 + 본문 + 푸터 (모든 페이지 동일) */
   return (
-    <div className={kcClsx("kcLoginClass")}>
+    <div
+      className={clsx(
+        kcClsx("kcLoginClass"),
+        "flex min-h-screen min-w-0 max-w-full flex-col h-full justify-center",
+      )}
+    >
       {isLoginPage ? (
         <SaraminLoginLayout
           registrationUrl={registrationUrl}
@@ -299,8 +304,11 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
           {loginFormContent}
         </SaraminLoginLayout>
       ) : (
-        <div id="wrapper" className="content mobile_page">
-          <div className="mobile_form_wrap">{formCard}</div>
+        <div
+          id="wrapper"
+          className="w-full max-w-full bg-white px-4 pb-10 pt-6 md:max-w-[400px] md:mx-auto"
+        >
+          <div className="mx-auto max-w-[400px]">{formCard}</div>
         </div>
       )}
     </div>

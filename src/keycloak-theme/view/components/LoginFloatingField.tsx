@@ -20,13 +20,13 @@ export const LoginIdInput = forwardRef<
   ref
 ) {
   return (
-    <div className="id_text_wrap">
+    <div className="relative">
       <input
         ref={ref}
         type="text"
         id={id}
         name={name}
-        className="id_text inpTypoBox2"
+        className="block h-[52px] w-full rounded border border-saramin-gray40 bg-saramin-surface px-3.5 pt-4 text-base font-medium text-saramin-text outline-none transition-[border-color,padding] placeholder:text-saramin-gray70 focus:border-saramin-primary focus:pt-[9px] focus:outline-none"
         defaultValue={defaultValue}
         autoFocus={autoFocus}
         required={required}
@@ -36,10 +36,13 @@ export const LoginIdInput = forwardRef<
         aria-describedby={error ? `${id}-error` : undefined}
       />
       <label htmlFor={id}>
-        <span className="blind">{label}</span>
+        <span className="sr-only">{label}</span>
       </label>
       {error && (
-        <p id={`${id}-error`} className="msgInvalid">
+        <p
+          id={`${id}-error`}
+          className="mt-1 text-[13px] leading-snug text-saramin-negative"
+        >
           {error}
         </p>
       )}
@@ -63,13 +66,13 @@ export const LoginPwInput = forwardRef<
   }
 >(function LoginPwInput({ id, name, label, error, required, maxLength }, ref) {
   return (
-    <div className="pw_text_wrap">
+    <div className="relative mt-2">
       <input
         ref={ref}
         type="password"
         id={id}
         name={name}
-        className="pw_text inpTypoBox2"
+        className="block h-[52px] w-full rounded border border-saramin-gray40 bg-saramin-surface px-3.5 pt-4 text-base font-medium text-saramin-text outline-none transition-[border-color,padding] placeholder:text-saramin-gray70 focus:border-saramin-primary focus:pt-[9px] focus:outline-none"
         required={required}
         maxLength={maxLength ?? 32}
         placeholder="비밀번호"
@@ -77,10 +80,13 @@ export const LoginPwInput = forwardRef<
         aria-describedby={error ? `${id}-error` : undefined}
       />
       <label htmlFor={id}>
-        <span className="blind">{label}</span>
+        <span className="sr-only">{label}</span>
       </label>
       {error && (
-        <p id={`${id}-error`} className="msgInvalid">
+        <p
+          id={`${id}-error`}
+          className="mt-1 text-[13px] leading-snug text-saramin-negative"
+        >
           {error}
         </p>
       )}

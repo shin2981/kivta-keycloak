@@ -48,22 +48,27 @@ export function LoginView({ kcContext, i18n }: LoginViewProps) {
       />
 
       {"rememberMe" in realm && realm.rememberMe && (
-        <p className="ck_login_opt">
+        <p className="flex flex-wrap items-center gap-x-4 gap-y-2 py-4 text-sm leading-5 text-saramin-text md:my-4 md:mb-6">
           {!kcContext.usernameHidden && (
-            <span className="inpChk2">
+            <span className="inline-flex cursor-pointer items-center gap-2">
               <input
                 type="checkbox"
                 name="idstore"
                 id="idstore"
                 title={loginMessagesKo.saveId}
                 aria-label={loginMessagesKo.saveId}
-                            />
-              <label className="lbl" htmlFor="idstore" id="idstore_lb">
+                className="h-[18px] w-[18px] cursor-pointer accent-[var(--primary)]"
+              />
+              <label
+                className="cursor-pointer select-none"
+                htmlFor="idstore"
+                id="idstore_lb"
+              >
                 {loginMessagesKo.saveId}
               </label>
             </span>
           )}
-          <span className="inpChk2">
+          <span className="inline-flex cursor-pointer items-center gap-2">
             <input
               type="checkbox"
               name="rememberMe"
@@ -71,15 +76,23 @@ export function LoginView({ kcContext, i18n }: LoginViewProps) {
               title={i18n.msgStr("rememberMe")}
               defaultChecked={!!login?.rememberMe}
               aria-label={i18n.msgStr("rememberMe")}
+              className="h-[18px] w-[18px] cursor-pointer accent-[var(--primary)]"
             />
-            <label className="lbl" htmlFor="autologin" id="autologin_lb">
+            <label
+              className="cursor-pointer select-none"
+              htmlFor="autologin"
+              id="autologin_lb"
+            >
               {i18n.msgStr("rememberMe")}
             </label>
           </span>
         </p>
       )}
 
-      <button type="submit" className="login_btn btnType colorInvert sizeL">
+      <button
+        type="submit"
+        className="mb-3 flex h-[52px] w-full cursor-pointer items-center justify-center rounded border-0 bg-saramin-primary px-4 text-base font-bold text-white transition-colors hover:bg-saramin-primary-dark"
+      >
         {i18n.msgStr("doLogIn")}
       </button>
     </form>

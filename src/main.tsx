@@ -1,8 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./saramin-layout-common.css";
 import "./index.css";
-import "./saramin-mobile.css";
 import { KcPage } from "./keycloak-theme/kc.gen";
 
 // Uncomment to test a specific page in dev (then comment back for production)

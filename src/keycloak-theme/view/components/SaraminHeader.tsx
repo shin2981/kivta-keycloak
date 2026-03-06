@@ -34,18 +34,21 @@ export function SaraminHeader({ title = "로그인" }: SaraminHeaderProps) {
   };
 
   return (
-    <header className="wrapHeader target_sticky" role="banner">
+    <header
+      className="sticky top-0 z-[100] flex h-14 items-center justify-center border-b border-saramin-border-light bg-saramin-surface px-4"
+      role="banner"
+    >
       <button
         type="button"
-        className="btnClose"
+        className="absolute left-3 top-1/2 flex h-10 w-10 -translate-y-1/2 cursor-pointer items-center justify-center border-0 bg-transparent p-0 text-saramin-text"
         onClick={handleClose}
         aria-label="닫기"
       >
         <CloseIcon />
-        <span className="blind">닫기</span>
+        <span className="sr-only">닫기</span>
       </button>
-      <h1 className="wrap_close_tit">
-        <span className="tit_close_header">{title}</span>
+      <h1 className="m-0 text-lg font-bold leading-tight text-saramin-text">
+        <span className="font-inherit">{title}</span>
       </h1>
     </header>
   );
