@@ -1,5 +1,4 @@
 import type { KcContext } from "../login/KcContext";
-import type { I18n } from "../login/i18n";
 import {
   AuthHeader,
   AuthFooter,
@@ -12,31 +11,31 @@ type PasswordKcContext = Extract<KcContext, { pageId: "login-reset-password.ftl"
 
 interface PasswordViewProps {
   kcContext: PasswordKcContext;
-  i18n: I18n;
 }
 
-export function PasswordView({ kcContext, i18n }: PasswordViewProps) {
+export function PasswordView({ kcContext }: PasswordViewProps) {
   const { url, realm, messagesPerField } = kcContext;
   const usernameLabel = "loginWithEmailAllowed" in realm && realm.loginWithEmailAllowed
-    ? i18n.msgStr("email")
-    : i18n.msgStr("username");
+    ? "이메일"
+    : "사용자 이름";
   const error = messagesPerField.existsError("username")
     ? messagesPerField.getFirstError("username")
     : undefined;
 
-  const loginUrl = "loginUrl" in url ? (url as { loginUrl?: string }).loginUrl : url.loginAction;
+  const urlExt = url as { loginUrl?: string; loginAction: string };
+  const loginUrl = urlExt.loginUrl ?? urlExt.loginAction;
 
   return (
     <>
-      <AuthHeader>{i18n.msgStr("emailForgotTitle")}</AuthHeader>
+      <AuthHeader>비밀번호 찾기</AuthHeader>
       <p className="mb-4 text-sm text-theme-text-sub">
         {"duplicateEmailsAllowed" in realm && realm.duplicateEmailsAllowed
-          ? i18n.msgStr("emailInstructionUsername")
-          : i18n.msgStr("emailInstruction")}
+          ? "사용자 이름 또는 이메일 주소를 입력하시면 새 비밀번호 생성 방법을 안내해 드립니다."
+          : "이메일 주소를 입력하시면 새 비밀번호 생성 방법을 안내해 드립니다."}
       </p>
       <form
         id="kc-reset-password-form"
-        action={url.loginAction}
+        action={urlExt.loginAction}
         method="post"
         className="space-y-1"
       >
@@ -47,10 +46,10 @@ export function PasswordView({ kcContext, i18n }: PasswordViewProps) {
           autoComplete="username"
           error={error}
         />
-        <PrimaryButton>{i18n.msgStr("doSubmit")}</PrimaryButton>
+        <PrimaryButton>제출</PrimaryButton>
       </form>
       <AuthFooter>
-        <LinkButton href={loginUrl}>{i18n.msgStr("backToLogin")}</LinkButton>
+        <LinkButton href={loginUrl}>로그인으로 돌아가기</LinkButton>
       </AuthFooter>
     </>
   );

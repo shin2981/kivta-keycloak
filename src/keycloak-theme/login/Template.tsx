@@ -21,7 +21,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     documentTitle,
     bodyClassName,
     kcContext,
-    i18n,
+    i18n: _i18n,
     doUseDefaultCss,
     classes,
     children,
@@ -29,13 +29,11 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
   const { kcClsx } = getKcClsx({ doUseDefaultCss, classes });
 
-  const { msg, msgStr, currentLanguage, enabledLanguages } = i18n;
-
   const { realm, auth, url, message, isAppInitiatedAction } = kcContext;
 
   useEffect(() => {
     document.title =
-      documentTitle ?? msgStr("loginTitle", realm.displayName || realm.name);
+      documentTitle ?? `${realm.displayName || realm.name} 로그인`;
   }, []);
 
   useSetClassName({
@@ -53,11 +51,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
   if (!isReadyToRender) {
     return null;
   }
-
-  const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const href = e.target.value;
-    if (href) window.location.href = href;
-  };
 
   const isLoginPage = kcContext.pageId === "login.ftl";
   const registrationUrl =
@@ -123,7 +116,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 return false;
               }}
             >
-              {msg("doTryAnotherWay")}
+              다른 방법 시도
             </a>
           </div>
         </form>
@@ -131,41 +124,9 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     </>
   );
 
-  /** 비로그인 페이지용 카드 내부: 로케일 + 제목 + 메시지 + children + 소셜/안내 */
+  /** 비로그인 페이지용 카드 내부: 제목 + 메시지 + children + 소셜/안내 */
   const otherPagesCardContent = (
     <div className="w-full">
-      {enabledLanguages.length > 1 && (
-        <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
-          <div
-            id="kc-locale-wrapper"
-            className={clsx(kcClsx("kcLocaleWrapperClass"), "mb-4")}
-          >
-            <select
-              id="kc-current-locale-link"
-              aria-label={msgStr("languages")}
-              value={
-                enabledLanguages.find(
-                  (l) => l.languageTag === currentLanguage.languageTag,
-                )?.href ??
-                enabledLanguages[0]?.href ??
-                ""
-              }
-              onChange={handleLanguageChange}
-              className={clsx(
-                "rounded border border-theme-gray40 bg-theme-surface px-3 py-2 text-sm text-theme-text",
-                "focus:border-theme-primary focus:outline-none focus:ring-1 focus:ring-theme-primary",
-                "min-w-[8rem] cursor-pointer",
-              )}
-            >
-              {enabledLanguages.map(({ languageTag, label, href }) => (
-                <option key={languageTag} value={href}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-      )}
       {headerNode != null && (
         <h1 id="kc-page-title" className="mb-6 text-center text-xl font-semibold text-theme-text">
           {headerNode}
@@ -214,7 +175,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 return false;
               }}
             >
-              {msg("doTryAnotherWay")}
+              다른 방법 시도
             </a>
           </div>
         </form>

@@ -1,5 +1,4 @@
 import type { KcContext } from "../login/KcContext";
-import type { I18n } from "../login/i18n";
 import { loginMessagesKo } from "../login/loginMessages";
 import { LoginIdInput, LoginPwInput } from "./components";
 
@@ -7,17 +6,16 @@ type LoginKcContext = Extract<KcContext, { pageId: "login.ftl" }>;
 
 interface LoginViewProps {
   kcContext: LoginKcContext;
-  i18n: I18n;
 }
 
-export function LoginView({ kcContext, i18n }: LoginViewProps) {
+export function LoginView({ kcContext }: LoginViewProps) {
   const { url, realm, login, messagesPerField } = kcContext;
   const usernameLabel =
     "loginWithEmailAllowed" in realm && realm.loginWithEmailAllowed && !realm.registrationEmailAsUsername
-      ? i18n.msgStr("usernameOrEmail")
+      ? "사용자 이름 또는 이메일"
       : "loginWithEmailAllowed" in realm && realm.loginWithEmailAllowed
-        ? i18n.msgStr("email")
-        : i18n.msgStr("username");
+        ? "이메일"
+        : "사용자 이름";
   const globalError = messagesPerField.exists("global")
     ? messagesPerField.getFirstError("username", "password")
     : undefined;
@@ -42,7 +40,7 @@ export function LoginView({ kcContext, i18n }: LoginViewProps) {
       <LoginPwInput
         id="password"
         name="password"
-        label={i18n.msgStr("password")}
+        label="비밀번호"
         error={globalError}
         maxLength={32}
       />
@@ -73,9 +71,9 @@ export function LoginView({ kcContext, i18n }: LoginViewProps) {
               type="checkbox"
               name="rememberMe"
               id="autologin"
-              title={i18n.msgStr("rememberMe")}
+              title="로그인 유지"
               defaultChecked={!!login?.rememberMe}
-              aria-label={i18n.msgStr("rememberMe")}
+              aria-label="로그인 유지"
               className="h-[18px] w-[18px] cursor-pointer accent-[var(--primary)]"
             />
             <label
@@ -83,7 +81,7 @@ export function LoginView({ kcContext, i18n }: LoginViewProps) {
               htmlFor="autologin"
               id="autologin_lb"
             >
-              {i18n.msgStr("rememberMe")}
+              로그인 유지
             </label>
           </span>
         </p>
@@ -93,7 +91,7 @@ export function LoginView({ kcContext, i18n }: LoginViewProps) {
         type="submit"
         className="mb-3 flex h-[52px] w-full cursor-pointer items-center justify-center rounded border-0 bg-theme-primary px-4 text-base font-bold text-white transition-colors hover:bg-theme-primary-dark"
       >
-        {i18n.msgStr("doLogIn")}
+        로그인
       </button>
     </form>
   );

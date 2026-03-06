@@ -1,5 +1,4 @@
 import type { KcContext } from "../login/KcContext";
-import type { I18n } from "../login/i18n";
 import {
   AuthHeader,
   AuthFooter,
@@ -13,10 +12,9 @@ type RegisterKcContext = Extract<KcContext, { pageId: "register.ftl" }>;
 
 interface RegisterViewProps {
   kcContext: RegisterKcContext;
-  i18n: I18n;
 }
 
-export function RegisterView({ kcContext, i18n }: RegisterViewProps) {
+export function RegisterView({ kcContext }: RegisterViewProps) {
   const { url, realm, messagesPerField } = kcContext;
   const urlExt = url as { registrationAction?: string; loginUrl?: string; loginAction?: string };
   const registrationAction = urlExt.registrationAction ?? urlExt.loginAction ?? "#";
@@ -27,7 +25,7 @@ export function RegisterView({ kcContext, i18n }: RegisterViewProps) {
 
   return (
     <>
-      <AuthHeader>{i18n.msgStr("registerTitle")}</AuthHeader>
+      <AuthHeader>회원가입</AuthHeader>
       <form
         id="kc-register-form"
         action={registrationAction}
@@ -37,14 +35,14 @@ export function RegisterView({ kcContext, i18n }: RegisterViewProps) {
         {!realm.registrationEmailAsUsername && (
           <>
             <TextField
-              label={i18n.msgStr("firstName")}
+              label="이름"
               name="firstName"
               type="text"
               autoComplete="given-name"
               error={messagesPerField.getFirstError("firstName")}
             />
             <TextField
-              label={i18n.msgStr("lastName")}
+              label="성"
               name="lastName"
               type="text"
               autoComplete="family-name"
@@ -53,7 +51,7 @@ export function RegisterView({ kcContext, i18n }: RegisterViewProps) {
           </>
         )}
         <TextField
-          label={i18n.msgStr("email")}
+          label="이메일"
           name="email"
           type="email"
           autoComplete="email"
@@ -61,7 +59,7 @@ export function RegisterView({ kcContext, i18n }: RegisterViewProps) {
         />
         {!realm.registrationEmailAsUsername && (
           <TextField
-            label={i18n.msgStr("username")}
+            label="사용자 이름"
             name="username"
             type="text"
             autoComplete="username"
@@ -69,13 +67,13 @@ export function RegisterView({ kcContext, i18n }: RegisterViewProps) {
           />
         )}
         <PasswordField
-          label={i18n.msgStr("password")}
+          label="비밀번호"
           name="password"
           autoComplete="new-password"
           error={messagesPerField.getFirstError("password")}
         />
         <PasswordField
-          label={i18n.msgStr("passwordConfirm")}
+          label="비밀번호 확인"
           name="password-confirm"
           autoComplete="new-password"
           error={messagesPerField.getFirstError("password-confirm")}
@@ -83,10 +81,10 @@ export function RegisterView({ kcContext, i18n }: RegisterViewProps) {
         {globalError && (
           <p className="mb-2 text-sm text-theme-negative">{globalError}</p>
         )}
-        <PrimaryButton>{i18n.msgStr("doRegister")}</PrimaryButton>
+        <PrimaryButton>가입</PrimaryButton>
       </form>
       <AuthFooter>
-        <LinkButton href={loginUrl}>{i18n.msgStr("backToLogin")}</LinkButton>
+        <LinkButton href={loginUrl}>로그인으로 돌아가기</LinkButton>
       </AuthFooter>
     </>
   );

@@ -1,31 +1,29 @@
 import type { KcContext } from "../login/KcContext";
-import type { I18n } from "../login/i18n";
 import { AuthHeader, LinkButton } from "./components";
 
 type EmailKcContext = Extract<KcContext, { pageId: "login-verify-email.ftl" }>;
 
 interface EmailViewProps {
   kcContext: EmailKcContext;
-  i18n: I18n;
 }
 
-export function EmailView({ kcContext, i18n }: EmailViewProps) {
+export function EmailView({ kcContext }: EmailViewProps) {
   const { url } = kcContext;
   const user = "user" in kcContext ? kcContext.user : undefined;
   const email = user && "email" in user ? (user as { email?: string }).email ?? "" : "";
 
   return (
     <>
-      <AuthHeader>{i18n.msgStr("emailVerifyTitle")}</AuthHeader>
+      <AuthHeader>이메일 인증</AuthHeader>
       <p className="mb-4 text-sm text-theme-text">
-        {i18n.msg("emailVerifyInstruction1", email)}
+        {email ? `${email}(으)로 이메일 인증 링크가 포함된 메일을 보냈습니다.` : "이메일 인증 링크가 포함된 메일을 보냈습니다."}
       </p>
       <p className="mb-4 text-sm text-theme-text-sub">
-        {i18n.msgStr("emailVerifyInstruction2")}{" "}
+        이메일의 링크를 클릭하여 계속 진행해 주세요.{" "}
         <LinkButton href={url.loginAction}>
-          {i18n.msgStr("doClickHere")}
+          여기를 클릭
         </LinkButton>{" "}
-        {i18n.msgStr("emailVerifyInstruction3")}
+        하여 애플리케이션으로 돌아갑니다.
       </p>
     </>
   );
