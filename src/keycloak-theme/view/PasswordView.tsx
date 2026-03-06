@@ -4,7 +4,6 @@ import {
   AuthFooter,
   TextField,
   PrimaryButton,
-  LinkButton,
 } from "./components";
 
 type PasswordKcContext = Extract<KcContext, { pageId: "login-reset-password.ftl" }>;
@@ -49,7 +48,12 @@ export function PasswordView({ kcContext }: PasswordViewProps) {
         <PrimaryButton>제출</PrimaryButton>
       </form>
       <AuthFooter>
-        <LinkButton href={loginUrl}>로그인으로 돌아가기</LinkButton>
+        <a
+          href={loginUrl}
+          className="text-theme-text-sub no-underline hover:text-theme-primary"
+        >
+          로그인으로 돌아가기
+        </a>
       </AuthFooter>
     </>
   );

@@ -4,6 +4,9 @@ import { forwardRef, useState } from "react";
  * 로그인 입력: 아이디
  * input.id_text.inpTypoBox2 + label > span.blind
  */
+const loginInputBaseClass =
+  "block h-[52px] w-full rounded border border-theme-gray40 bg-theme-surface px-3.5 text-base font-medium text-theme-text outline-none transition-[border-color,padding] placeholder:text-theme-gray70 focus:border-theme-primary focus:outline-none";
+
 export const LoginIdInput = forwardRef<
   HTMLInputElement,
   {
@@ -14,24 +17,41 @@ export const LoginIdInput = forwardRef<
     autoFocus?: boolean;
     error?: string;
     required?: boolean;
+    type?: string;
+    placeholder?: string;
+    maxLength?: number;
+    autoComplete?: string;
   }
 >(function LoginIdInput(
-  { id, name, label, defaultValue, autoFocus, error, required },
+  {
+    id,
+    name,
+    label,
+    defaultValue,
+    autoFocus,
+    error,
+    required,
+    type = "text",
+    placeholder = "아이디",
+    maxLength = 26,
+    autoComplete,
+  },
   ref,
 ) {
   return (
     <div className="relative">
       <input
         ref={ref}
-        type="text"
+        type={type}
         id={id}
         name={name}
-        className="block h-[52px] w-full rounded border border-theme-gray40 bg-theme-surface px-3.5 text-base font-medium text-theme-text outline-none transition-[border-color,padding] placeholder:text-theme-gray70 focus:border-theme-primary focus:outline-none"
+        className={loginInputBaseClass}
         defaultValue={defaultValue}
         autoFocus={autoFocus}
         required={required}
-        placeholder="아이디"
-        maxLength={26}
+        placeholder={placeholder}
+        maxLength={maxLength}
+        autoComplete={autoComplete}
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-error` : undefined}
       />
@@ -63,21 +83,29 @@ export const LoginPwInput = forwardRef<
     error?: string;
     required?: boolean;
     maxLength?: number;
+    placeholder?: string;
+    autoComplete?: string;
+    /** 로그인 폼에서는 true(기본), 회원가입 등 연속 필드에서는 false로 상단 여백 제거 */
+    noMarginTop?: boolean;
   }
->(function LoginPwInput({ id, name, label, error, required, maxLength }, ref) {
+>(function LoginPwInput(
+  { id, name, label, error, required, maxLength, placeholder = "비밀번호", autoComplete, noMarginTop },
+  ref,
+) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className="relative mt-2">
+    <div className={`relative ${noMarginTop ? "" : "mt-2"}`}>
       <input
         ref={ref}
         type={showPassword ? "text" : "password"}
         id={id}
         name={name}
-        className="block h-[52px] w-full rounded border border-theme-gray40 bg-theme-surface px-3.5 pr-12 text-base font-medium text-theme-text outline-none transition-[border-color,padding] placeholder:text-theme-gray70 focus:border-theme-primary focus:outline-none"
+        className={`${loginInputBaseClass} pr-12`}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
         required={required}
         maxLength={maxLength ?? 32}
-        placeholder="비밀번호"
         aria-invalid={!!error}
         aria-describedby={error ? `${id}-error` : undefined}
       />
