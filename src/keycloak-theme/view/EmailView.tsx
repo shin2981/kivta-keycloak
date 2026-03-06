@@ -1,5 +1,5 @@
 import type { KcContext } from "../login/KcContext";
-import { AuthHeader, LinkButton } from "./components";
+import { LinkButton } from "./components";
 
 type EmailKcContext = Extract<KcContext, { pageId: "login-verify-email.ftl" }>;
 
@@ -14,7 +14,6 @@ export function EmailView({ kcContext }: EmailViewProps) {
 
   return (
     <>
-      <AuthHeader>이메일 인증</AuthHeader>
       <p className="mb-4 text-sm text-theme-text">
         {email ? `${email}(으)로 이메일 인증 링크가 포함된 메일을 보냈습니다.` : "이메일 인증 링크가 포함된 메일을 보냈습니다."}
       </p>

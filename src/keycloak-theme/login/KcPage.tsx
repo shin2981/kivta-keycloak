@@ -18,7 +18,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
 
   const headerTitle =
     kcContext.pageId === "login.ftl"
-      ? null
+      ? "로그인"
       : kcContext.pageId === "register.ftl"
         ? "회원가입"
         : kcContext.pageId === "login-reset-password.ftl"

@@ -1,12 +1,10 @@
 import type { KcContext } from "../login/KcContext";
-import {
-  AuthHeader,
-  AuthFooter,
-  TextField,
-  PrimaryButton,
-} from "./components";
+import { AuthFooter, LoginIdInput, PrimaryButton } from "./components";
 
-type PasswordKcContext = Extract<KcContext, { pageId: "login-reset-password.ftl" }>;
+type PasswordKcContext = Extract<
+  KcContext,
+  { pageId: "login-reset-password.ftl" }
+>;
 
 interface PasswordViewProps {
   kcContext: PasswordKcContext;
@@ -14,9 +12,10 @@ interface PasswordViewProps {
 
 export function PasswordView({ kcContext }: PasswordViewProps) {
   const { url, realm, messagesPerField } = kcContext;
-  const usernameLabel = "loginWithEmailAllowed" in realm && realm.loginWithEmailAllowed
-    ? "이메일"
-    : "사용자 이름";
+  const usernameLabel =
+    "loginWithEmailAllowed" in realm && realm.loginWithEmailAllowed
+      ? "이메일"
+      : "사용자 이름";
   const error = messagesPerField.existsError("username")
     ? messagesPerField.getFirstError("username")
     : undefined;
@@ -26,7 +25,6 @@ export function PasswordView({ kcContext }: PasswordViewProps) {
 
   return (
     <>
-      <AuthHeader>비밀번호 찾기</AuthHeader>
       <p className="mb-4 text-sm text-theme-text-sub">
         {"duplicateEmailsAllowed" in realm && realm.duplicateEmailsAllowed
           ? "사용자 이름 또는 이메일 주소를 입력하시면 새 비밀번호 생성 방법을 안내해 드립니다."
@@ -36,13 +34,15 @@ export function PasswordView({ kcContext }: PasswordViewProps) {
         id="kc-reset-password-form"
         action={urlExt.loginAction}
         method="post"
-        className="space-y-1"
+        className="space-y-2"
       >
-        <TextField
-          label={usernameLabel}
+        <LoginIdInput
+          id="username"
           name="username"
-          type="text"
+          label={usernameLabel}
+          placeholder={usernameLabel}
           autoComplete="username"
+          required
           error={error}
         />
         <PrimaryButton>제출</PrimaryButton>

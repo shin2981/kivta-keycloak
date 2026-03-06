@@ -5,6 +5,8 @@ import logo from "../../assets/logo.png";
 
 export interface LoginLayoutProps {
   children: ReactNode;
+  /** 카드 내부 상단 타이틀 (예: 로그인) */
+  title?: string;
   registrationUrl?: string;
   /** 아이디/비밀번호 찾기 링크용 */
   loginResetCredentialsUrl?: string;
@@ -16,6 +18,7 @@ export interface LoginLayoutProps {
 
 export function LoginLayout({
   children,
+  title,
   registrationUrl,
   loginResetCredentialsUrl,
   socialProvidersNode,
@@ -29,13 +32,18 @@ export function LoginLayout({
         "rounded-lg border border-theme-border-light",
       )}
     >
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-center mb-4">
         <span aria-hidden>
           <img src={logo} alt="한국산업훈련협회" />
         </span>
       </div>
 
       <div className="rounded-lg bg-theme-surface p-4 md:p-6">
+        {title && (
+          <h1 className="mb-4 text-center text-xl font-semibold text-theme-text">
+            {title}
+          </h1>
+        )}
         <div className="w-full">
           {children}
 

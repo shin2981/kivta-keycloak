@@ -204,6 +204,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     >
       {isLoginPage ? (
         <LoginLayout
+          title={typeof headerNode === "string" ? headerNode : "로그인"}
           registrationUrl={registrationUrl}
           loginResetCredentialsUrl={loginResetCredentialsUrl}
           socialProvidersNode={socialProvidersNode}
