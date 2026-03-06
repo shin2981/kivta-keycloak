@@ -6,7 +6,7 @@ import { LoginView, RegisterView, PasswordView, EmailView } from "../view";
 import DefaultPage from "keycloakify/login/DefaultPage";
 
 const UserProfileFormFields = lazy(
-  () => import("keycloakify/login/UserProfileFormFields")
+  () => import("keycloakify/login/UserProfileFormFields"),
 );
 
 /**
@@ -18,7 +18,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
 
   const headerTitle =
     kcContext.pageId === "login.ftl"
-      ? i18n.msgStr("doLogIn")
+      ? null
       : kcContext.pageId === "register.ftl"
         ? i18n.msgStr("registerTitle")
         : kcContext.pageId === "login-reset-password.ftl"
@@ -27,6 +27,8 @@ export default function KcPage(props: { kcContext: KcContext }) {
             ? i18n.msgStr("emailVerifyTitle")
             : String(kcContext.pageId);
 
+  const mobileBodyClass = "kc-mobile min-h-screen bg-white";
+
   switch (kcContext.pageId) {
     case "login.ftl":
       return (
@@ -34,12 +36,10 @@ export default function KcPage(props: { kcContext: KcContext }) {
           kcContext={kcContext}
           i18n={i18n}
           doUseDefaultCss={false}
-          bodyClassName="min-h-screen flex items-center justify-center bg-[var(--bg-body)]"
+          bodyClassName={mobileBodyClass}
           headerNode={headerTitle}
         >
-          <div className="flex min-h-screen items-center justify-center p-4">
-            <LoginView kcContext={kcContext} i18n={i18n} />
-          </div>
+          <LoginView kcContext={kcContext} i18n={i18n} />
         </Template>
       );
     case "register.ftl":
@@ -48,12 +48,10 @@ export default function KcPage(props: { kcContext: KcContext }) {
           kcContext={kcContext}
           i18n={i18n}
           doUseDefaultCss={false}
-          bodyClassName="min-h-screen flex items-center justify-center bg-[var(--bg-body)]"
+          bodyClassName={mobileBodyClass}
           headerNode={headerTitle}
         >
-          <div className="flex min-h-screen items-center justify-center p-4">
-            <RegisterView kcContext={kcContext} i18n={i18n} />
-          </div>
+          <RegisterView kcContext={kcContext} i18n={i18n} />
         </Template>
       );
     case "login-reset-password.ftl":
@@ -62,12 +60,10 @@ export default function KcPage(props: { kcContext: KcContext }) {
           kcContext={kcContext}
           i18n={i18n}
           doUseDefaultCss={false}
-          bodyClassName="min-h-screen flex items-center justify-center bg-[var(--bg-body)]"
+          bodyClassName={mobileBodyClass}
           headerNode={headerTitle}
         >
-          <div className="flex min-h-screen items-center justify-center p-4">
-            <PasswordView kcContext={kcContext} i18n={i18n} />
-          </div>
+          <PasswordView kcContext={kcContext} i18n={i18n} />
         </Template>
       );
     case "login-verify-email.ftl":
@@ -76,12 +72,10 @@ export default function KcPage(props: { kcContext: KcContext }) {
           kcContext={kcContext}
           i18n={i18n}
           doUseDefaultCss={false}
-          bodyClassName="min-h-screen flex items-center justify-center bg-[var(--bg-body)]"
+          bodyClassName={mobileBodyClass}
           headerNode={headerTitle}
         >
-          <div className="flex min-h-screen items-center justify-center p-4">
-            <EmailView kcContext={kcContext} i18n={i18n} />
-          </div>
+          <EmailView kcContext={kcContext} i18n={i18n} />
         </Template>
       );
     default:

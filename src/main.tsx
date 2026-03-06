@@ -1,14 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import "./saramin-layout-common.css";
 import "./index.css";
+import "./saramin-mobile.css";
 import { KcPage } from "./keycloak-theme/kc.gen";
 
 // Uncomment to test a specific page in dev (then comment back for production)
-// import { getKcContextMock } from "./keycloak-theme/login/KcPageStory";
-// if (import.meta.env.DEV) {
-//   window.kcContext = getKcContextMock({ pageId: "login.ftl", overrides: {} });
-//   // window.kcContext = getKcContextMock({ pageId: "register.ftl", overrides: {} });
-// }
+import { getKcContextMock } from "./keycloak-theme/login/KcPageStory";
+if (import.meta.env.DEV) {
+  window.kcContext = getKcContextMock({ pageId: "login.ftl", overrides: {} });
+  // window.kcContext = getKcContextMock({ pageId: "register.ftl", overrides: {} });
+}
 
 declare global {
   interface Window {
@@ -25,5 +27,5 @@ createRoot(document.getElementById("root")!).render(
     ) : (
       <KcPage kcContext={window.kcContext} />
     )}
-  </StrictMode>
+  </StrictMode>,
 );
