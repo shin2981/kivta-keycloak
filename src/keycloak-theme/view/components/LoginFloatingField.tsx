@@ -1,7 +1,7 @@
 import { forwardRef, useState } from "react";
 
 /**
- * 사람인 모바일 로그인 입력: 아이디
+ * 로그인 입력: 아이디
  * input.id_text.inpTypoBox2 + label > span.blind
  */
 export const LoginIdInput = forwardRef<
@@ -51,7 +51,7 @@ export const LoginIdInput = forwardRef<
 });
 
 /**
- * 사람인 모바일 로그인 입력: 비밀번호
+ * 로그인 입력: 비밀번호
  * input.pw_text.inpTypoBox2 + label > span.blind
  */
 export const LoginPwInput = forwardRef<

@@ -1,5 +1,5 @@
 /**
- * 사람인 스타일 로그인 페이지용 한글 메시지.
+ * 로그인 페이지용 한글 메시지.
  * Keycloak 서버 메시지에 없을 수 있는 키에 대한 로컬 fallback.
  */
 export const loginMessagesKo = {
