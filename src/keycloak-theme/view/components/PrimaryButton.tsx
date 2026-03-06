@@ -19,13 +19,9 @@ export function PrimaryButton({
     <button
       type="submit"
       className={cn(
-        "w-full rounded-lg bg-[var(--primary)] px-4 py-2.5 font-medium text-[var(--kc-primary-foreground)] transition hover:bg-[var(--primary-dark)] focus:outline-none focus:ring-2 focus:ring-[var(--primary)] focus:ring-offset-2 focus:ring-offset-[var(--bg-white)] disabled:opacity-50",
+        "w-full rounded-lg bg-theme-primary px-4 py-2.5 font-medium text-white transition hover:bg-theme-primary-dark focus:outline-none focus:ring-2 focus:ring-theme-primary focus:ring-offset-2 focus:ring-offset-theme-surface disabled:opacity-50",
         className
       )}
-      style={{
-        background: "var(--primary)",
-        color: "var(--kc-primary-foreground)",
-      }}
       disabled={disabled ?? loading}
       {...props}
     >

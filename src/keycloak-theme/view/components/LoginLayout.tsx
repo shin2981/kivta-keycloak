@@ -26,7 +26,7 @@ export function LoginLayout({
       id="wrapper"
       className={clsx(
         "w-full max-w-full px-4 pb-10 pt-6 md:max-w-[400px] md:mx-auto",
-        "border border-gray-200 rounded-lg",
+        "rounded-lg border border-theme-border-light",
       )}
     >
       <div className="flex justify-center mb-6">

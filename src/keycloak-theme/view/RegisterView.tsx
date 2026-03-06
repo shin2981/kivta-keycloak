@@ -1,7 +1,6 @@
 import type { KcContext } from "../login/KcContext";
 import type { I18n } from "../login/i18n";
 import {
-  AuthCard,
   AuthHeader,
   AuthFooter,
   TextField,
@@ -27,7 +26,7 @@ export function RegisterView({ kcContext, i18n }: RegisterViewProps) {
     : undefined;
 
   return (
-    <AuthCard>
+    <>
       <AuthHeader>{i18n.msgStr("registerTitle")}</AuthHeader>
       <form
         id="kc-register-form"
@@ -82,13 +81,13 @@ export function RegisterView({ kcContext, i18n }: RegisterViewProps) {
           error={messagesPerField.getFirstError("password-confirm")}
         />
         {globalError && (
-          <p className="mb-2 text-sm text-[var(--negative)]">{globalError}</p>
+          <p className="mb-2 text-sm text-theme-negative">{globalError}</p>
         )}
         <PrimaryButton>{i18n.msgStr("doRegister")}</PrimaryButton>
       </form>
       <AuthFooter>
         <LinkButton href={loginUrl}>{i18n.msgStr("backToLogin")}</LinkButton>
       </AuthFooter>
-    </AuthCard>
+    </>
   );
 }

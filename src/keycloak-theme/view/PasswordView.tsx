@@ -1,10 +1,11 @@
 import type { KcContext } from "../login/KcContext";
 import type { I18n } from "../login/i18n";
 import {
-  AuthCard,
   AuthHeader,
+  AuthFooter,
   TextField,
   PrimaryButton,
+  LinkButton,
 } from "./components";
 
 type PasswordKcContext = Extract<KcContext, { pageId: "login-reset-password.ftl" }>;
@@ -23,10 +24,12 @@ export function PasswordView({ kcContext, i18n }: PasswordViewProps) {
     ? messagesPerField.getFirstError("username")
     : undefined;
 
+  const loginUrl = "loginUrl" in url ? (url as { loginUrl?: string }).loginUrl : url.loginAction;
+
   return (
-    <AuthCard>
+    <>
       <AuthHeader>{i18n.msgStr("emailForgotTitle")}</AuthHeader>
-      <p className="mb-4 text-sm text-[var(--text-sub)]">
+      <p className="mb-4 text-sm text-theme-text-sub">
         {"duplicateEmailsAllowed" in realm && realm.duplicateEmailsAllowed
           ? i18n.msgStr("emailInstructionUsername")
           : i18n.msgStr("emailInstruction")}
@@ -46,6 +49,9 @@ export function PasswordView({ kcContext, i18n }: PasswordViewProps) {
         />
         <PrimaryButton>{i18n.msgStr("doSubmit")}</PrimaryButton>
       </form>
-    </AuthCard>
+      <AuthFooter>
+        <LinkButton href={loginUrl}>{i18n.msgStr("backToLogin")}</LinkButton>
+      </AuthFooter>
+    </>
   );
 }

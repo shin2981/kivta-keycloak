@@ -8,12 +8,13 @@ import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import { LoginLayout } from "../view/components";
+import logo from "../assets/logo.png";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
   const {
     displayInfo = false,
     displayMessage = true,
-    displayRequiredFields = false,
+    displayRequiredFields: _displayRequiredFields = false,
     headerNode,
     socialProvidersNode = null,
     infoNode = null,
@@ -130,159 +131,105 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     </>
   );
 
-  const formCard = (
-    <div className={kcClsx("kcFormCardClass")}>
-      <header className={kcClsx("kcFormHeaderClass")}>
-        {enabledLanguages.length > 1 && (
-          <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
-            <div
-              id="kc-locale-wrapper"
-              className={kcClsx("kcLocaleWrapperClass")}
+  /** 비로그인 페이지용 카드 내부: 로케일 + 제목 + 메시지 + children + 소셜/안내 */
+  const otherPagesCardContent = (
+    <div className="w-full">
+      {enabledLanguages.length > 1 && (
+        <div className={kcClsx("kcLocaleMainClass")} id="kc-locale">
+          <div
+            id="kc-locale-wrapper"
+            className={clsx(kcClsx("kcLocaleWrapperClass"), "mb-4")}
+          >
+            <select
+              id="kc-current-locale-link"
+              aria-label={msgStr("languages")}
+              value={
+                enabledLanguages.find(
+                  (l) => l.languageTag === currentLanguage.languageTag,
+                )?.href ??
+                enabledLanguages[0]?.href ??
+                ""
+              }
+              onChange={handleLanguageChange}
+              className={clsx(
+                "rounded border border-theme-gray40 bg-theme-surface px-3 py-2 text-sm text-theme-text",
+                "focus:border-theme-primary focus:outline-none focus:ring-1 focus:ring-theme-primary",
+                "min-w-[8rem] cursor-pointer",
+              )}
             >
-              <select
-                id="kc-current-locale-link"
-                aria-label={msgStr("languages")}
-                value={
-                  enabledLanguages.find(
-                    (l) => l.languageTag === currentLanguage.languageTag,
-                  )?.href ??
-                  enabledLanguages[0]?.href ??
-                  ""
-                }
-                onChange={handleLanguageChange}
-                className={clsx(
-                  "rounded-md border border-[var(--border)] bg-[var(--bg-white)] px-3 py-2 text-sm text-[var(--text-main)]",
-                  "focus:border-[var(--primary)] focus:outline-none focus:ring-1 focus:ring-[var(--primary)]",
-                  "min-w-[8rem] cursor-pointer",
-                )}
-              >
-                {enabledLanguages.map(({ languageTag, label, href }) => (
-                  <option key={languageTag} value={href}>
-                    {label}
-                  </option>
-                ))}
-              </select>
-            </div>
+              {enabledLanguages.map(({ languageTag, label, href }) => (
+                <option key={languageTag} value={href}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      )}
+      {headerNode != null && (
+        <h1 id="kc-page-title" className="mb-6 text-center text-xl font-semibold text-theme-text">
+          {headerNode}
+        </h1>
+      )}
+      {displayMessage &&
+        message !== undefined &&
+        (message.type !== "warning" || !isAppInitiatedAction) && (
+          <div
+            className={clsx(
+              `alert-${message.type}`,
+              kcClsx("kcAlertClass"),
+              "mb-4 rounded border px-3 py-2 text-sm",
+              message?.type === "error" && "border-theme-negative bg-red-50 text-theme-negative",
+              message?.type === "success" && "border-green-600 bg-green-50 text-green-800",
+              message?.type === "info" && "border-theme-primary bg-blue-50 text-theme-primary",
+              message?.type === "warning" && "border-amber-500 bg-amber-50 text-amber-800",
+            )}
+          >
+            <span
+              className={kcClsx("kcAlertTitleClass")}
+              dangerouslySetInnerHTML={{
+                __html: kcSanitize(message.summary),
+              }}
+            />
           </div>
         )}
-        {(() => {
-          const node = !(
-            auth !== undefined &&
-            auth.showUsername &&
-            !auth.showResetCredentials
-          ) ? (
-            headerNode != null ? (
-              <h1 id="kc-page-title">{headerNode}</h1>
-            ) : null
-          ) : (
-            <div id="kc-username" className={kcClsx("kcFormGroupClass")}>
-              <label id="kc-attempted-username">{auth.attemptedUsername}</label>
-              <a
-                id="reset-login"
-                href={url.loginRestartFlowUrl}
-                aria-label={msgStr("restartLoginTooltip")}
-              >
-                <div className="kc-login-tooltip">
-                  <i className={kcClsx("kcResetFlowIcon")}></i>
-                  <span className="kc-tooltip-text">
-                    {msg("restartLoginTooltip")}
-                  </span>
-                </div>
-              </a>
-            </div>
-          );
-
-          if (displayRequiredFields) {
-            return (
-              <div className={kcClsx("kcContentWrapperClass")}>
-                <div
-                  className={clsx(kcClsx("kcLabelWrapperClass"), "subtitle")}
-                >
-                  <span className="subtitle">
-                    <span className="required">*</span>
-                    {msg("requiredFields")}
-                  </span>
-                </div>
-                <div className="col-md-10">{node}</div>
-              </div>
-            );
-          }
-
-          return node;
-        })()}
-      </header>
-      <div id="kc-content">
-        <div id="kc-content-wrapper">
-          {displayMessage &&
-            message !== undefined &&
-            (message.type !== "warning" || !isAppInitiatedAction) && (
-              <div
-                className={clsx(
-                  `alert-${message.type}`,
-                  kcClsx("kcAlertClass"),
-                  `pf-m-${message?.type === "error" ? "danger" : message.type}`,
-                )}
-              >
-                <div className="pf-c-alert__icon">
-                  {message.type === "success" && (
-                    <span className={kcClsx("kcFeedbackSuccessIcon")}></span>
-                  )}
-                  {message.type === "warning" && (
-                    <span className={kcClsx("kcFeedbackWarningIcon")}></span>
-                  )}
-                  {message.type === "error" && (
-                    <span className={kcClsx("kcFeedbackErrorIcon")}></span>
-                  )}
-                  {message.type === "info" && (
-                    <span className={kcClsx("kcFeedbackInfoIcon")}></span>
-                  )}
-                </div>
-                <span
-                  className={kcClsx("kcAlertTitleClass")}
-                  dangerouslySetInnerHTML={{
-                    __html: kcSanitize(message.summary),
-                  }}
-                />
-              </div>
-            )}
-          {children}
-          {auth !== undefined && auth.showTryAnotherWayLink && (
-            <form
-              id="kc-select-try-another-way-form"
-              action={url.loginAction}
-              method="post"
+      {children}
+      {auth !== undefined && auth.showTryAnotherWayLink && (
+        <form
+          id="kc-select-try-another-way-form"
+          action={url.loginAction}
+          method="post"
+        >
+          <div className={kcClsx("kcFormGroupClass")}>
+            <input type="hidden" name="tryAnotherWay" value="on" />
+            <a
+              href="#"
+              id="try-another-way"
+              className="text-sm text-theme-primary hover:text-theme-primary-dark hover:underline"
+              onClick={(event) => {
+                document.forms[
+                  "kc-select-try-another-way-form" as never
+                ].requestSubmit();
+                event.preventDefault();
+                return false;
+              }}
             >
-              <div className={kcClsx("kcFormGroupClass")}>
-                <input type="hidden" name="tryAnotherWay" value="on" />
-                <a
-                  href="#"
-                  id="try-another-way"
-                  onClick={(event) => {
-                    document.forms[
-                      "kc-select-try-another-way-form" as never
-                    ].requestSubmit();
-                    event.preventDefault();
-                    return false;
-                  }}
-                >
-                  {msg("doTryAnotherWay")}
-                </a>
-              </div>
-            </form>
-          )}
-          {socialProvidersNode}
-          {displayInfo && (
-            <div id="kc-info" className={kcClsx("kcSignUpClass")}>
-              <div
-                id="kc-info-wrapper"
-                className={kcClsx("kcInfoAreaWrapperClass")}
-              >
-                {infoNode}
-              </div>
-            </div>
-          )}
+              {msg("doTryAnotherWay")}
+            </a>
+          </div>
+        </form>
+      )}
+      {socialProvidersNode}
+      {displayInfo && (
+        <div id="kc-info" className={kcClsx("kcSignUpClass")}>
+          <div
+            id="kc-info-wrapper"
+            className={kcClsx("kcInfoAreaWrapperClass")}
+          >
+            {infoNode}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 
@@ -306,9 +253,19 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
       ) : (
         <div
           id="wrapper"
-          className="w-full max-w-full bg-white px-4 pb-10 pt-6 md:max-w-[400px] md:mx-auto"
+          className={clsx(
+            "w-full max-w-full px-4 pb-10 pt-6 md:max-w-[400px] md:mx-auto",
+            "rounded-lg border border-theme-border-light",
+          )}
         >
-          <div className="mx-auto max-w-[400px]">{formCard}</div>
+          <div className="mb-6 flex justify-center">
+            <span aria-hidden>
+              <img src={logo} alt="한국산업훈련협회" />
+            </span>
+          </div>
+          <div className="rounded-lg bg-theme-surface p-4 md:p-6">
+            {otherPagesCardContent}
+          </div>
         </div>
       )}
     </div>
