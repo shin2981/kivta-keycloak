@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 사람인 디자인 토큰 (https://www.saramin.co.kr/zf_user/auth 기준) */
+/* 디자인 토큰 */
 :root {
   --bg-body: #f5f5f5;
   --bg-white: #ffffff;

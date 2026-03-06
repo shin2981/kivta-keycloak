@@ -7,7 +7,7 @@ import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
-import { SaraminLoginLayout } from "../view/components";
+import { LoginLayout } from "../view/components";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
   const {
@@ -295,14 +295,14 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
       )}
     >
       {isLoginPage ? (
-        <SaraminLoginLayout
+        <LoginLayout
           registrationUrl={registrationUrl}
           loginResetCredentialsUrl={loginResetCredentialsUrl}
           socialProvidersNode={socialProvidersNode}
           infoNode={displayInfo ? infoNode : null}
         >
           {loginFormContent}
-        </SaraminLoginLayout>
+        </LoginLayout>
       ) : (
         <div
           id="wrapper"

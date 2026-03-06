@@ -26,7 +26,7 @@ export const LoginIdInput = forwardRef<
         type="text"
         id={id}
         name={name}
-        className="block h-[52px] w-full rounded border border-saramin-gray40 bg-saramin-surface px-3.5 pt-4 text-base font-medium text-saramin-text outline-none transition-[border-color,padding] placeholder:text-saramin-gray70 focus:border-saramin-primary focus:pt-[9px] focus:outline-none"
+        className="block h-[52px] w-full rounded border border-theme-gray40 bg-theme-surface px-3.5 pt-4 text-base font-medium text-theme-text outline-none transition-[border-color,padding] placeholder:text-theme-gray70 focus:border-theme-primary focus:pt-[9px] focus:outline-none"
         defaultValue={defaultValue}
         autoFocus={autoFocus}
         required={required}
@@ -41,7 +41,7 @@ export const LoginIdInput = forwardRef<
       {error && (
         <p
           id={`${id}-error`}
-          className="mt-1 text-[13px] leading-snug text-saramin-negative"
+          className="mt-1 text-[13px] leading-snug text-theme-negative"
         >
           {error}
         </p>
@@ -74,7 +74,7 @@ export const LoginPwInput = forwardRef<
         type={showPassword ? "text" : "password"}
         id={id}
         name={name}
-        className="block h-[52px] w-full rounded border border-saramin-gray40 bg-saramin-surface px-3.5 pr-12 pt-4 text-base font-medium text-saramin-text outline-none transition-[border-color,padding] placeholder:text-saramin-gray70 focus:border-saramin-primary focus:pt-[9px] focus:outline-none"
+        className="block h-[52px] w-full rounded border border-theme-gray40 bg-theme-surface px-3.5 pr-12 pt-4 text-base font-medium text-theme-text outline-none transition-[border-color,padding] placeholder:text-theme-gray70 focus:border-theme-primary focus:pt-[9px] focus:outline-none"
         required={required}
         maxLength={maxLength ?? 32}
         placeholder="비밀번호"
@@ -87,7 +87,7 @@ export const LoginPwInput = forwardRef<
       <button
         type="button"
         tabIndex={-1}
-        className="absolute right-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded text-saramin-gray60 hover:text-saramin-text focus:outline-none focus-visible:ring-2 focus-visible:ring-saramin-primary focus-visible:ring-offset-1"
+        className="absolute right-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded text-theme-gray60 hover:text-theme-text focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-primary focus-visible:ring-offset-1"
         onClick={() => setShowPassword((prev) => !prev)}
         aria-label={showPassword ? "비밀번호 숨기기" : "비밀번호 보기"}
       >
@@ -105,7 +105,7 @@ export const LoginPwInput = forwardRef<
       {error && (
         <p
           id={`${id}-error`}
-          className="mt-1 text-[13px] leading-snug text-saramin-negative"
+          className="mt-1 text-[13px] leading-snug text-theme-negative"
         >
           {error}
         </p>

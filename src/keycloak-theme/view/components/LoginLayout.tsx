@@ -3,7 +3,7 @@ import { clsx } from "keycloakify/tools/clsx";
 import { loginMessagesKo } from "../../login/loginMessages";
 import logo from "../../assets/logo.png";
 
-export interface SaraminLoginLayoutProps {
+export interface LoginLayoutProps {
   children: ReactNode;
   registrationUrl?: string;
   /** 아이디/비밀번호 찾기 링크용 */
@@ -14,13 +14,13 @@ export interface SaraminLoginLayoutProps {
   infoNode?: ReactNode;
 }
 
-export function SaraminLoginLayout({
+export function LoginLayout({
   children,
   registrationUrl,
   loginResetCredentialsUrl,
   socialProvidersNode,
   infoNode,
-}: SaraminLoginLayoutProps) {
+}: LoginLayoutProps) {
   return (
     <div
       id="wrapper"
@@ -35,34 +35,34 @@ export function SaraminLoginLayout({
         </span>
       </div>
 
-      <div className="rounded-lg bg-saramin-surface p-4 md:p-6">
+      <div className="rounded-lg bg-theme-surface p-4 md:p-6">
         <div className="w-full">
           {children}
 
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-saramin-border-light pt-5 text-sm leading-[22px]">
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 border-t border-theme-border-light pt-5 text-sm leading-[22px]">
             {loginResetCredentialsUrl && (
               <>
                 <a
                   href={loginResetCredentialsUrl}
-                  className="text-saramin-text-sub no-underline hover:text-saramin-primary"
+                  className="text-theme-text-sub no-underline hover:text-theme-primary"
                 >
                   {loginMessagesKo.findId}
                 </a>
                 <i
                   aria-hidden
-                  className="mx-0.5 text-saramin-gray40 not-italic"
+                  className="mx-0.5 text-theme-gray40 not-italic"
                 >
                   |
                 </i>
                 <a
                   href={loginResetCredentialsUrl}
-                  className="text-saramin-text-sub no-underline hover:text-saramin-primary"
+                  className="text-theme-text-sub no-underline hover:text-theme-primary"
                 >
                   {loginMessagesKo.findPassword}
                 </a>
                 <i
                   aria-hidden
-                  className="mx-0.5 text-saramin-gray40 not-italic"
+                  className="mx-0.5 text-theme-gray40 not-italic"
                 >
                   |
                 </i>
@@ -71,7 +71,7 @@ export function SaraminLoginLayout({
             {registrationUrl && (
               <a
                 href={registrationUrl}
-                className="text-saramin-text-sub no-underline hover:text-saramin-primary"
+                className="text-theme-text-sub no-underline hover:text-theme-primary"
               >
                 {loginMessagesKo.signUp}
               </a>
@@ -80,9 +80,9 @@ export function SaraminLoginLayout({
         </div>
 
         {socialProvidersNode && (
-          <div className="mt-6 border-t border-saramin-border-light pt-6">
+          <div className="mt-6 border-t border-theme-border-light pt-6">
             <div className="mb-4 text-center">
-              <p className="m-0 text-sm font-medium leading-snug text-saramin-text-sub before:mr-2 before:inline-block before:h-px before:w-10 before:align-middle before:bg-saramin-border-light before:content-[''] after:ml-2 after:inline-block after:h-px after:w-10 after:align-middle after:bg-saramin-border-light after:content-['']">
+              <p className="m-0 text-sm font-medium leading-snug text-theme-text-sub before:mr-2 before:inline-block before:h-px before:w-10 before:align-middle before:bg-theme-border-light before:content-[''] after:ml-2 after:inline-block after:h-px after:w-10 after:align-middle after:bg-theme-border-light after:content-['']">
                 {loginMessagesKo.socialLoginTitle}
               </p>
             </div>

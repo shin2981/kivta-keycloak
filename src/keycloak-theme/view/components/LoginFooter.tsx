@@ -1,14 +1,14 @@
 /**
- * 사람인 통합 로그인 페이지 푸터: 링크, 고객센터, 저작권
+ * 로그인 페이지 푸터: 링크, 고객센터, 저작권
  */
-export function SaraminFooter() {
+export function LoginFooter() {
   const baseUrl = "/"; // 필요 시 환경/설정에서 가져오기
   const linkClass =
-    "text-saramin-text-sub no-underline hover:text-saramin-primary";
+    "text-theme-text-sub no-underline hover:text-theme-primary";
   return (
     <footer
       id="sri_footer"
-      className="mt-auto border-t border-saramin-border-light bg-saramin-surface py-8 px-6 text-[13px] text-saramin-text-sub md:py-10 md:px-6"
+      className="mt-auto border-t border-theme-border-light bg-theme-surface py-8 px-6 text-[13px] text-theme-text-sub md:py-10 md:px-6"
       role="contentinfo"
     >
       <div className="mx-auto max-w-[1200px]">
@@ -37,7 +37,7 @@ export function SaraminFooter() {
               <a
                 href={baseUrl}
                 title="개인정보처리방침"
-                className={`font-bold text-saramin-text ${linkClass}`}
+                className={`font-bold text-theme-text ${linkClass}`}
               >
                 개인정보처리방침
               </a>
@@ -46,7 +46,7 @@ export function SaraminFooter() {
               <a
                 href={baseUrl}
                 title="위치기반서비스이용약관"
-                className={`font-bold text-saramin-text ${linkClass}`}
+                className={`font-bold text-theme-text ${linkClass}`}
               >
                 위치기반서비스이용약관
               </a>
@@ -61,18 +61,18 @@ export function SaraminFooter() {
         <div className="copyright">
           <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
             <dl className="m-0 flex flex-wrap gap-x-3 gap-y-1">
-              <dt className="m-0 font-semibold text-saramin-text">고객센터</dt>
+              <dt className="m-0 font-semibold text-theme-text">고객센터</dt>
               <dd className="m-0">02-6226-5000 (평일 09:00~19:00, 주말·공휴일 휴무)</dd>
             </dl>
             <dl className="m-0 flex flex-wrap gap-x-3 gap-y-1">
-              <dt className="m-0 font-semibold text-saramin-text">이메일</dt>
+              <dt className="m-0 font-semibold text-theme-text">이메일</dt>
               <dd className="m-0">
                 <a
-                  href="mailto:help@saramin.co.kr"
+                  href="mailto:help@example.com"
                   title="이메일 문의"
-                  className="text-saramin-primary no-underline"
+                  className="text-theme-primary no-underline"
                 >
-                  help@saramin.co.kr
+                  help@example.com
                 </a>
               </dd>
             </dl>

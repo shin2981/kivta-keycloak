@@ -48,7 +48,7 @@ export function LoginView({ kcContext, i18n }: LoginViewProps) {
       />
 
       {"rememberMe" in realm && realm.rememberMe && (
-        <p className="flex flex-wrap items-center gap-x-4 gap-y-2 py-4 text-sm leading-5 text-saramin-text md:my-4 md:mb-6">
+        <p className="flex flex-wrap items-center gap-x-4 gap-y-2 py-4 text-sm leading-5 text-theme-text md:my-4 md:mb-6">
           {!kcContext.usernameHidden && (
             <span className="inline-flex cursor-pointer items-center gap-2">
               <input
@@ -91,7 +91,7 @@ export function LoginView({ kcContext, i18n }: LoginViewProps) {
 
       <button
         type="submit"
-        className="mb-3 flex h-[52px] w-full cursor-pointer items-center justify-center rounded border-0 bg-saramin-primary px-4 text-base font-bold text-white transition-colors hover:bg-saramin-primary-dark"
+        className="mb-3 flex h-[52px] w-full cursor-pointer items-center justify-center rounded border-0 bg-theme-primary px-4 text-base font-bold text-white transition-colors hover:bg-theme-primary-dark"
       >
         {i18n.msgStr("doLogIn")}
       </button>
