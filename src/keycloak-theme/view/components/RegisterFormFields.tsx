@@ -8,13 +8,16 @@ import {
 } from "react";
 import { cn } from "../../lib/cn";
 
+/** 이미지 기준: 테두리 없음, 연한 회색(#F2F2F2), 라벨은 박스 안 상단 */
 const registerFieldShell =
-  "rounded-[10px] bg-[#F2F2F] px-3.5 pt-2 pb-3 transition-[box-shadow] focus-within:ring-2 focus-within:ring-[#2DB400] focus-within:ring-offset-0";
+  "relative rounded-[8px] border-0 bg-[#F2F2F2] px-4 py-3 shadow-none outline-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[#2DB400]/35 focus-within:ring-offset-0";
 
+/** 모바일 Safari: 16px 미만 입력 시 자동 확대 방지 → 기본 16px, md 이상에서만 15px */
 const registerInputInner =
-  "mt-1 w-full min-w-0 border-0 bg-transparent p-0 text-[15px] font-semibold text-black outline-none placeholder:text-neutral-400";
+  "peer w-full min-w-0 border-0 bg-transparent pt-4 pb-1 text-base font-semibold leading-snug text-black outline-none placeholder:text-transparent md:text-[15px]";
 
-const labelClass = "block text-[12px] font-medium leading-tight text-[#8E8E8E]";
+const floatingLabelClass =
+  "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[15px] font-semibold leading-tight text-[#8E8E8E] transition-all duration-150 ease-out peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-[12px] peer-focus:font-normal peer-[&:not(:placeholder-shown)]:top-2 peer-[&:not(:placeholder-shown)]:translate-y-0 peer-[&:not(:placeholder-shown)]:text-[12px] peer-[&:not(:placeholder-shown)]:font-normal";
 
 const helperClass = "mt-1.5 text-[12px] leading-snug text-[#8E8E8E]";
 
@@ -50,9 +53,6 @@ export const RegisterTextField = forwardRef<
       <div
         className={cn(registerFieldShell, error && "ring-2 ring-theme-negative")}
       >
-        <label htmlFor={id} className={labelClass}>
-          {label}
-        </label>
         <input
           ref={ref}
           id={id}
@@ -62,11 +62,15 @@ export const RegisterTextField = forwardRef<
           maxLength={maxLength}
           inputMode={inputMode}
           className={registerInputInner}
+          placeholder=" "
           aria-invalid={!!error}
           aria-describedby={
             error ? `${id}-err` : helperText ? `${id}-help` : undefined
           }
         />
+        <label htmlFor={id} className={floatingLabelClass}>
+          {label}
+        </label>
       </div>
       {helperText && !error && (
         <p id={`${id}-help`} className={helperClass}>
@@ -103,14 +107,10 @@ export const RegisterPasswordField = forwardRef<
     <div>
       <div
         className={cn(
-          "relative",
           registerFieldShell,
           error && "ring-2 ring-theme-negative",
         )}
       >
-        <label htmlFor={id} className={labelClass}>
-          {label}
-        </label>
         <input
           ref={ref}
           id={id}
@@ -118,16 +118,20 @@ export const RegisterPasswordField = forwardRef<
           type={show ? "text" : "password"}
           autoComplete={autoComplete}
           maxLength={maxLength ?? 20}
-          className={cn(registerInputInner, "pr-10")}
+          className={cn(registerInputInner, "pr-11")}
+          placeholder=" "
           aria-invalid={!!error}
           aria-describedby={
             error ? `${id}-err` : helperText ? `${id}-help` : undefined
           }
         />
+        <label htmlFor={id} className={floatingLabelClass}>
+          {label}
+        </label>
         <button
           type="button"
           tabIndex={-1}
-          className="absolute bottom-2 right-2 flex h-8 w-8 items-center justify-center rounded text-[#8E8E8E] hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DB400]"
+          className="absolute right-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded text-[#8E8E8E] hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DB400]"
           onClick={() => setShow((p) => !p)}
           aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
         >
@@ -228,14 +232,11 @@ export function RegisterUsernameField({
     <div>
       <div
         className={cn(
-          "flex min-h-[72px] items-center gap-2 rounded-[10px] bg-[#F2F2F] pl-3.5 pr-2 py-2 transition-[box-shadow] focus-within:ring-2 focus-within:ring-[#2DB400]",
+          "flex min-h-[64px] items-center gap-2 rounded-[8px] border-0 bg-[#F2F2F2] pl-0 pr-2 py-2 shadow-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[#2DB400]/35",
           error && "ring-2 ring-theme-negative",
         )}
       >
-        <div className="min-w-0 flex-1">
-          <label htmlFor={id} className={labelClass}>
-            {label}
-          </label>
+        <div className="relative min-w-0 flex-1 px-4">
           <input
             id={id}
             name={name}
@@ -243,14 +244,18 @@ export function RegisterUsernameField({
             autoComplete="username"
             maxLength={20}
             onInput={onInput}
-            className={cn(registerInputInner, "mt-1")}
+            className={cn(registerInputInner, "pr-2")}
+            placeholder=" "
             aria-invalid={!!error}
             aria-describedby={duplicateHint ? hintId : undefined}
           />
+          <label htmlFor={id} className={floatingLabelClass}>
+            {label}
+          </label>
         </div>
         <button
           type="button"
-          className="shrink-0 rounded-lg bg-[#E8E8E8] px-3 py-2 text-[13px] font-medium text-[#5c5c5c] transition hover:bg-[#ddd]"
+          className="shrink-0 rounded-[6px] bg-[#E8E8E8] px-3 py-2 text-[13px] font-medium text-[#5c5c5c] transition hover:bg-[#ddd] active:bg-[#d0d0d0]"
           onClick={onDuplicateCheck}
         >
           중복확인

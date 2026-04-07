@@ -28,17 +28,22 @@ export function LoginLayout({
     <div
       id="wrapper"
       className={clsx(
-        "w-full max-w-full px-4 pb-10 pt-6 md:max-w-[400px] md:mx-auto",
-        "rounded-lg border border-theme-border-light",
+        "w-full min-w-0 max-w-full",
+        "px-4 pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] pt-[max(1.25rem,env(safe-area-inset-top,0px))] sm:px-6 sm:pt-6",
+        "md:mx-auto md:max-w-[400px] md:pb-10 md:pt-8 lg:max-w-[440px]",
       )}
     >
-      <div className="flex justify-center mb-4">
+      <div className="mb-4 flex justify-center sm:mb-5">
         <span aria-hidden>
-          <img src={logo} alt="한국산업훈련협회" />
+          <img
+            src={logo}
+            alt="한국산업훈련협회"
+            className="max-h-10 w-auto sm:max-h-11"
+          />
         </span>
       </div>
 
-      <div className="rounded-lg bg-theme-surface p-4 md:p-6">
+      <div className="rounded-xl bg-theme-surface p-4 sm:p-5 md:p-6 lg:p-8">
         {title && (
           <h1 className="mb-4 text-center text-xl font-semibold text-theme-text">
             {title}
