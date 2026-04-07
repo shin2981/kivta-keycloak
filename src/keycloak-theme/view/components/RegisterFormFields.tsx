@@ -8,18 +8,22 @@ import {
 } from "react";
 import { cn } from "../../lib/cn";
 
-/** 이미지 기준: 테두리 없음, 연한 회색(#F2F2F2), 라벨은 박스 안 상단 */
+/** 이미지 기준: 테두리 없음, 연한 회색(#F2F2F2), 노인 친화: 넉넉한 패딩·최소 높이 */
 const registerFieldShell =
-  "relative rounded-[8px] border-0 bg-[#F2F2F2] px-4 py-3 shadow-none outline-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[#2DB400]/35 focus-within:ring-offset-0";
+  "relative min-h-[3.25rem] rounded-[10px] border-0 bg-[#F2F2F2] px-4 py-3.5 shadow-none outline-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[#2DB400]/40 focus-within:ring-offset-0";
 
-/** 모바일 Safari: 16px 미만 입력 시 자동 확대 방지 → 기본 16px, md 이상에서만 15px */
+/** 16px 이상 유지(모바일 자동 확대 방지 + 가독성). 데스크톱도 동일 크기로 통일 */
 const registerInputInner =
-  "peer w-full min-w-0 border-0 bg-transparent pt-4 pb-1 text-base font-semibold leading-snug text-black outline-none placeholder:text-transparent md:text-[15px]";
+  "peer w-full min-w-0 border-0 bg-transparent pt-5 pb-1.5 text-[16px] font-semibold leading-snug text-black outline-none placeholder:text-transparent";
 
+/** 빈 칸: 크고 또렷한 힌트 / 채움·포커스: 14px 이상 유지(12px 미만 회피) */
 const floatingLabelClass =
-  "pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[15px] font-semibold leading-tight text-[#8E8E8E] transition-all duration-150 ease-out peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-[12px] peer-focus:font-normal peer-[&:not(:placeholder-shown)]:top-2 peer-[&:not(:placeholder-shown)]:translate-y-0 peer-[&:not(:placeholder-shown)]:text-[12px] peer-[&:not(:placeholder-shown)]:font-normal";
+  "pointer-events-none absolute left-4 top-1/2 max-w-[calc(100%-2rem)] -translate-y-1/2 text-[17px] font-semibold leading-snug text-[#5a5a5a] transition-[top,transform,font-size,color] duration-200 ease-out peer-focus:top-3 peer-focus:translate-y-0 peer-focus:text-[14px] peer-focus:font-medium peer-focus:text-[#4a4a4a] peer-[&:not(:placeholder-shown)]:top-3 peer-[&:not(:placeholder-shown)]:translate-y-0 peer-[&:not(:placeholder-shown)]:text-[14px] peer-[&:not(:placeholder-shown)]:font-medium peer-[&:not(:placeholder-shown)]:text-[#4a4a4a]";
 
-const helperClass = "mt-1.5 text-[12px] leading-snug text-[#8E8E8E]";
+const helperClass =
+  "mt-2 text-[14px] leading-relaxed text-[#5c5c5c]";
+
+const errorTextClass = "mt-1.5 text-[14px] leading-snug text-theme-negative";
 
 export const RegisterTextField = forwardRef<
   HTMLInputElement,
@@ -78,7 +82,7 @@ export const RegisterTextField = forwardRef<
         </p>
       )}
       {error && (
-        <p id={`${id}-err`} className="mt-1 text-[13px] text-theme-negative">
+        <p id={`${id}-err`} className={errorTextClass}>
           {error}
         </p>
       )}
@@ -118,7 +122,7 @@ export const RegisterPasswordField = forwardRef<
           type={show ? "text" : "password"}
           autoComplete={autoComplete}
           maxLength={maxLength ?? 20}
-          className={cn(registerInputInner, "pr-11")}
+          className={cn(registerInputInner, "pr-14")}
           placeholder=" "
           aria-invalid={!!error}
           aria-describedby={
@@ -131,7 +135,7 @@ export const RegisterPasswordField = forwardRef<
         <button
           type="button"
           tabIndex={-1}
-          className="absolute right-3 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded text-[#8E8E8E] hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DB400]"
+          className="absolute right-2 top-1/2 -translate-y-1/2 flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-[#6a6a6a] hover:bg-black/5 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DB400]"
           onClick={() => setShow((p) => !p)}
           aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
         >
@@ -144,7 +148,7 @@ export const RegisterPasswordField = forwardRef<
         </p>
       )}
       {error && (
-        <p id={`${id}-err`} className="mt-1 text-[13px] text-theme-negative">
+        <p id={`${id}-err`} className={errorTextClass}>
           {error}
         </p>
       )}
@@ -232,7 +236,7 @@ export function RegisterUsernameField({
     <div>
       <div
         className={cn(
-          "flex min-h-[64px] items-center gap-2 rounded-[8px] border-0 bg-[#F2F2F2] pl-0 pr-2 py-2 shadow-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[#2DB400]/35",
+          "flex min-h-[3.25rem] items-center gap-2 rounded-[10px] border-0 bg-[#F2F2F2] pl-0 pr-2 py-2 shadow-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[#2DB400]/40",
           error && "ring-2 ring-theme-negative",
         )}
       >
@@ -255,7 +259,7 @@ export function RegisterUsernameField({
         </div>
         <button
           type="button"
-          className="shrink-0 rounded-[6px] bg-[#E8E8E8] px-3 py-2 text-[13px] font-medium text-[#5c5c5c] transition hover:bg-[#ddd] active:bg-[#d0d0d0]"
+          className="shrink-0 self-stretch rounded-[8px] bg-[#E8E8E8] px-3.5 py-2.5 text-[15px] font-semibold leading-tight text-[#454545] transition hover:bg-[#ddd] active:bg-[#d0d0d0] min-h-[44px] sm:min-w-[5.5rem]"
           onClick={onDuplicateCheck}
         >
           중복확인
@@ -267,9 +271,7 @@ export function RegisterUsernameField({
         </p>
       )}
       {helperText && <p className={helperClass}>{helperText}</p>}
-      {error && (
-        <p className="mt-1 text-[13px] text-theme-negative">{error}</p>
-      )}
+      {error && <p className={errorTextClass}>{error}</p>}
     </div>
   );
 }
