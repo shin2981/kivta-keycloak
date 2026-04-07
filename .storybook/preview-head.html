@@ -1,0 +1,23 @@
+body.sb-show-main.sb-main-padded {
+  padding: 0;
+}
+
+/* 스토리 전환 시 흰 번쩍임 완화 (keycloakify 스타터와 동일) */
+@keyframes fadeToTransparent {
+  from {
+    background-color: #393939;
+  }
+
+  to {
+    background-color: transparent;
+  }
+}
+html {
+  animation: fadeToTransparent 500ms forwards ease-in;
+}
+body > .sb-preparing-docs {
+  visibility: hidden;
+}
+body > .sb-preparing-story {
+  visibility: hidden;
+}
