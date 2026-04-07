@@ -20,6 +20,7 @@ export const loginMessagesKo = {
   pageSubtitlePasswordReset:
     "아래 정보를 입력해 비밀번호 재설정을 진행해 주세요.",
   pageSubtitleEmailVerify: "아래 안내에 따라 인증을 완료해 주세요.",
+  loginInvalidCredentials: "아이디나 비밀번호가 틀려요.",
 } as const;
 
 export type LoginMessageKey = keyof typeof loginMessagesKo;

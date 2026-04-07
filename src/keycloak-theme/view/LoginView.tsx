@@ -1,4 +1,5 @@
 import type { KcContext } from "../login/KcContext";
+import { getLoginCredentialFieldError } from "../login/loginCredentialError";
 import { loginMessagesKo } from "../login/loginMessages";
 import { AuthPageHeading, LoginIdInput, LoginPwInput } from "./components";
 
@@ -9,16 +10,15 @@ interface LoginViewProps {
 }
 
 export function LoginView({ kcContext }: LoginViewProps) {
-  const { url, realm, login, messagesPerField } = kcContext;
+  const { url, realm, login } = kcContext;
   const usernameLabel =
     "loginWithEmailAllowed" in realm && realm.loginWithEmailAllowed && !realm.registrationEmailAsUsername
       ? "사용자 이름 또는 이메일"
       : "loginWithEmailAllowed" in realm && realm.loginWithEmailAllowed
         ? "이메일"
         : "사용자 이름";
-  const globalError = messagesPerField.exists("global")
-    ? messagesPerField.getFirstError("username", "password")
-    : undefined;
+  /** 자격 증명 오류는 한글 + 필드 테두리; 기타는 필드 하단에 서버 문구 */
+  const credentialError = getLoginCredentialFieldError(kcContext);
 
   return (
     <form
@@ -38,14 +38,15 @@ export function LoginView({ kcContext }: LoginViewProps) {
           label={usernameLabel}
           defaultValue={login?.username ?? ""}
           autoFocus
-          error={globalError}
+          invalid={!!credentialError}
         />
       )}
       <LoginPwInput
         id="password"
         name="password"
         label="비밀번호"
-        error={globalError}
+        invalid={!!credentialError}
+        error={credentialError}
         maxLength={32}
       />
 

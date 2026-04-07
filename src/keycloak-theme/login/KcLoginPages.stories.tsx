@@ -52,3 +52,18 @@ export const LoginKoLocale: Story = {
     />
   ),
 };
+
+/** 잘못된 아이디/비밀번호 — 상단 알림 없이 필드 테두리 + 한글 메시지 */
+export const LoginInvalidCredentials: Story = {
+  name: "로그인 · 자격 증명 오류(인라인)",
+  render: () => (
+    <LoginPage
+      kcContext={{
+        message: {
+          type: "error",
+          summary: "Invalid username or password.",
+        },
+      }}
+    />
+  ),
+};

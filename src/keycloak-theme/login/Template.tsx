@@ -9,6 +9,7 @@ import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
 import { LoginLayout } from "../view/components";
 import logo from "../assets/logo.png";
+import { suppressLoginCredentialTopMessage } from "./loginCredentialError";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
   const {
@@ -65,7 +66,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     <>
       {displayMessage &&
         message !== undefined &&
-        (message.type !== "warning" || !isAppInitiatedAction) && (
+        (message.type !== "warning" || !isAppInitiatedAction) &&
+        !suppressLoginCredentialTopMessage(kcContext) && (
           <div
             id="kc-feedback"
             className={clsx(

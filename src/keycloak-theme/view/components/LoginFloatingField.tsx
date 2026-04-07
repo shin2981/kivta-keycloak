@@ -18,6 +18,8 @@ export const LoginIdInput = forwardRef<
     label: string;
     defaultValue?: string;
     autoFocus?: boolean;
+    /** 빨간 테두리만 (하단 문구 없음) */
+    invalid?: boolean;
     error?: string;
     required?: boolean;
     type?: string;
@@ -32,6 +34,7 @@ export const LoginIdInput = forwardRef<
     label,
     defaultValue,
     autoFocus,
+    invalid,
     error,
     required,
     type = "text",
@@ -42,11 +45,12 @@ export const LoginIdInput = forwardRef<
   ref,
 ) {
   const displayLabel = placeholder || label;
+  const showErrorRing = !!(invalid || error);
 
   return (
     <div>
       <div
-        className={cn(authFieldShell, error && "ring-2 ring-theme-negative")}
+        className={cn(authFieldShell, showErrorRing && "ring-2 ring-theme-negative")}
       >
         <input
           ref={ref}
@@ -60,7 +64,7 @@ export const LoginIdInput = forwardRef<
           placeholder=" "
           maxLength={maxLength}
           autoComplete={autoComplete}
-          aria-invalid={!!error}
+          aria-invalid={showErrorRing}
           aria-describedby={error ? `${id}-error` : undefined}
         />
         <label htmlFor={id} className={authFloatingLabelClass}>
@@ -82,6 +86,7 @@ export const LoginPwInput = forwardRef<
     id: string;
     name: string;
     label: string;
+    invalid?: boolean;
     error?: string;
     required?: boolean;
     maxLength?: number;
@@ -93,6 +98,7 @@ export const LoginPwInput = forwardRef<
     id,
     name,
     label,
+    invalid,
     error,
     required,
     maxLength,
@@ -103,11 +109,12 @@ export const LoginPwInput = forwardRef<
 ) {
   const [showPassword, setShowPassword] = useState(false);
   const displayLabel = placeholder || label;
+  const showErrorRing = !!(invalid || error);
 
   return (
     <div>
       <div
-        className={cn(authFieldShell, error && "ring-2 ring-theme-negative")}
+        className={cn(authFieldShell, showErrorRing && "ring-2 ring-theme-negative")}
       >
         <input
           ref={ref}
@@ -119,7 +126,7 @@ export const LoginPwInput = forwardRef<
           autoComplete={autoComplete}
           required={required}
           maxLength={maxLength ?? 32}
-          aria-invalid={!!error}
+          aria-invalid={showErrorRing}
           aria-describedby={error ? `${id}-error` : undefined}
         />
         <label htmlFor={id} className={authFloatingLabelClass}>
