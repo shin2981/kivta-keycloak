@@ -11,6 +11,11 @@ export type { PrimaryButtonProps } from "./PrimaryButton";
 export { LinkButton } from "./LinkButton";
 export type { LinkButtonProps } from "./LinkButton";
 export { LoginIdInput, LoginPwInput } from "./LoginFloatingField";
+export {
+  RegisterPasswordField,
+  RegisterTextField,
+  RegisterUsernameField,
+} from "./RegisterFormFields";
 export { LoginHeader } from "./LoginHeader";
 export type { LoginHeaderProps } from "./LoginHeader";
 export { LoginFooter } from "./LoginFooter";

@@ -49,7 +49,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
           i18n={i18n}
           doUseDefaultCss={false}
           bodyClassName={mobileBodyClass}
-          headerNode={headerTitle}
+          headerNode={null}
         >
           <RegisterView kcContext={kcContext} />
         </Template>
