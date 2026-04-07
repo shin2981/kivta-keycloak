@@ -19,7 +19,7 @@ export function PrimaryButton({
     <button
       type="submit"
       className={cn(
-        "w-full rounded-lg bg-theme-primary px-4 py-2.5 font-medium text-white transition hover:bg-theme-primary-dark focus:outline-none focus:ring-2 focus:ring-theme-primary focus:ring-offset-2 focus:ring-offset-theme-surface disabled:opacity-50",
+        "w-full min-h-[56px] rounded-[10px] bg-black px-4 py-3 text-[17px] font-semibold text-white transition hover:bg-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 focus:ring-offset-theme-surface disabled:opacity-50",
         className
       )}
       disabled={disabled ?? loading}

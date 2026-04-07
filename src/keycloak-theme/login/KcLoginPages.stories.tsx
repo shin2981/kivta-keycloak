@@ -32,7 +32,7 @@ export const Register: Story = {
 };
 
 export const ResetPassword: Story = {
-  name: "비밀번호 찾기 (login-reset-password.ftl)",
+  name: "비밀번호 재설정 (login-reset-password.ftl)",
   render: () => <ResetPasswordPage />,
 };
 

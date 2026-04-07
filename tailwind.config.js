@@ -11,6 +11,9 @@ export default {
         "theme-surface": "var(--bg-white)",
         "theme-primary": "var(--primary)",
         "theme-primary-dark": "var(--primary-dark)",
+        /** 인풋 포커스 링·링크 강조 (녹색) — CTA 검정과 분리 */
+        "theme-accent": "var(--accent-green)",
+        "theme-accent-dark": "var(--accent-green-dark)",
         "theme-text": "var(--text-main)",
         "theme-text-sub": "var(--text-sub)",
         "theme-border": "var(--border)",

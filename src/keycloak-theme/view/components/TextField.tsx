@@ -1,5 +1,11 @@
 import { forwardRef } from "react";
 import { cn } from "../../lib/cn";
+import {
+  authErrorTextClass,
+  authFieldShell,
+  authFloatingLabelClass,
+  authInputInner,
+} from "./authFieldStyles";
 
 export interface TextFieldProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "className"> {
@@ -10,37 +16,36 @@ export interface TextFieldProps
 }
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ label, error, className = "", inputClassName = "", id, ...props }, ref) => {
+  (
+    { label, error, className = "", inputClassName = "", id, placeholder: _ignored, ...props },
+    ref,
+  ) => {
     const inputId = id ?? `input-${label.replace(/\s/g, "-").toLowerCase()}`;
     return (
       <div className={cn("mb-4", className)}>
-        <label
-          htmlFor={inputId}
-          className="mb-1.5 block text-sm font-medium text-theme-text"
+        <div
+          className={cn(authFieldShell, error && "ring-2 ring-theme-negative")}
         >
-          {label}
-        </label>
-        <input
-          ref={ref}
-          id={inputId}
-          className={cn(
-            "w-full rounded-lg border bg-theme-surface px-3 py-2 text-theme-text placeholder-theme-text-sub focus:outline-none focus:ring-1",
-            error
-              ? "border-theme-negative focus:border-theme-negative focus:ring-theme-negative"
-              : "border-theme-gray40 focus:border-theme-primary focus:ring-theme-primary",
-            inputClassName
-          )}
-          aria-invalid={!!error}
-          aria-describedby={error ? `${inputId}-error` : undefined}
-          {...props}
-        />
+          <input
+            ref={ref}
+            id={inputId}
+            placeholder=" "
+            className={cn(authInputInner, inputClassName)}
+            aria-invalid={!!error}
+            aria-describedby={error ? `${inputId}-error` : undefined}
+            {...props}
+          />
+          <label htmlFor={inputId} className={authFloatingLabelClass}>
+            {label}
+          </label>
+        </div>
         {error && (
-          <p id={`${inputId}-error`} className="mt-1 text-sm text-theme-negative">
+          <p id={`${inputId}-error`} className={authErrorTextClass}>
             {error}
           </p>
         )}
       </div>
     );
-  }
+  },
 );
 TextField.displayName = "TextField";

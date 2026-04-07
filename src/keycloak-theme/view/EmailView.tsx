@@ -1,5 +1,6 @@
 import type { KcContext } from "../login/KcContext";
-import { LinkButton } from "./components";
+import { loginMessagesKo } from "../login/loginMessages";
+import { AuthPageHeading, LinkButton } from "./components";
 
 type EmailKcContext = Extract<KcContext, { pageId: "login-verify-email.ftl" }>;
 
@@ -14,15 +15,19 @@ export function EmailView({ kcContext }: EmailViewProps) {
 
   return (
     <>
-      <p className="mb-4 text-sm text-theme-text">
+      <AuthPageHeading
+        title="이메일 인증"
+        subtitle={loginMessagesKo.pageSubtitleEmailVerify}
+      />
+      <p className="mb-4 text-[15px] leading-6 text-theme-text">
         {email ? `${email}(으)로 이메일 인증 링크가 포함된 메일을 보냈습니다.` : "이메일 인증 링크가 포함된 메일을 보냈습니다."}
       </p>
-      <p className="mb-4 text-sm text-theme-text-sub">
+      <p className="mb-4 text-[15px] leading-6 text-theme-text-sub">
         이메일의 링크를 클릭하여 계속 진행해 주세요.{" "}
         <LinkButton href={url.loginAction}>
           여기를 클릭
         </LinkButton>{" "}
-        하여 애플리케이션으로 돌아갑니다.
+        하여 한국산업훈련협회로 돌아갑니다.
       </p>
     </>
   );

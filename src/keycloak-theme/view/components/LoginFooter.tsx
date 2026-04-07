@@ -4,7 +4,7 @@
 export function LoginFooter() {
   const baseUrl = "/"; // 필요 시 환경/설정에서 가져오기
   const linkClass =
-    "text-theme-text-sub no-underline hover:text-theme-primary";
+    "text-theme-text-sub no-underline hover:text-theme-accent";
   return (
     <footer
       id="sri_footer"
@@ -70,7 +70,7 @@ export function LoginFooter() {
                 <a
                   href="mailto:help@example.com"
                   title="이메일 문의"
-                  className="text-theme-primary no-underline"
+                  className="text-theme-accent no-underline hover:text-theme-accent-dark"
                 >
                   help@example.com
                 </a>

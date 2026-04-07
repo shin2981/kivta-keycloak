@@ -14,7 +14,7 @@ export function LinkButton({
   return (
     <a
       className={cn(
-        "text-sm text-theme-primary hover:text-theme-primary-dark hover:underline focus:outline-none focus:underline",
+        "text-[15px] font-medium text-theme-accent hover:text-theme-accent-dark hover:underline focus:outline-none focus:underline",
         className
       )}
       {...props}

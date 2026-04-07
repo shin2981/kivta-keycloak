@@ -20,3 +20,5 @@ export { LoginHeader } from "./LoginHeader";
 export type { LoginHeaderProps } from "./LoginHeader";
 export { LoginFooter } from "./LoginFooter";
 export { LoginLayout } from "./LoginLayout";
+export { AuthPageHeading } from "./AuthPageHeading";
+export type { AuthPageHeadingProps } from "./AuthPageHeading";

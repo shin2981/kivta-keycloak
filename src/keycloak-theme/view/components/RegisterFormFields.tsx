@@ -7,23 +7,14 @@ import {
   type InputHTMLAttributes,
 } from "react";
 import { cn } from "../../lib/cn";
-
-/** 이미지 기준: 테두리 없음, 연한 회색(#F2F2F2), 노인 친화: 넉넉한 패딩·최소 높이 */
-const registerFieldShell =
-  "relative min-h-[3.25rem] rounded-[10px] border-0 bg-[#F2F2F2] px-4 py-3.5 shadow-none outline-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[#2DB400]/40 focus-within:ring-offset-0";
-
-/** 16px 이상 유지(모바일 자동 확대 방지 + 가독성). 데스크톱도 동일 크기로 통일 */
-const registerInputInner =
-  "peer w-full min-w-0 border-0 bg-transparent pt-5 pb-1.5 text-[16px] font-semibold leading-snug text-black outline-none placeholder:text-transparent";
-
-/** 빈 칸: 크고 또렷한 힌트 / 채움·포커스: 14px 이상 유지(12px 미만 회피) */
-const floatingLabelClass =
-  "pointer-events-none absolute left-4 top-1/2 max-w-[calc(100%-2rem)] -translate-y-1/2 text-[17px] font-semibold leading-snug text-[#5a5a5a] transition-[top,transform,font-size,color] duration-200 ease-out peer-focus:top-3 peer-focus:translate-y-0 peer-focus:text-[14px] peer-focus:font-medium peer-focus:text-[#4a4a4a] peer-[&:not(:placeholder-shown)]:top-3 peer-[&:not(:placeholder-shown)]:translate-y-0 peer-[&:not(:placeholder-shown)]:text-[14px] peer-[&:not(:placeholder-shown)]:font-medium peer-[&:not(:placeholder-shown)]:text-[#4a4a4a]";
-
-const helperClass =
-  "mt-2 text-[14px] leading-relaxed text-[#5c5c5c]";
-
-const errorTextClass = "mt-1.5 text-[14px] leading-snug text-theme-negative";
+import {
+  authErrorTextClass,
+  authFieldShell,
+  authFloatingLabelClass,
+  authHelperClass,
+  authInputInner,
+  authUsernameRowShell,
+} from "./authFieldStyles";
 
 export const RegisterTextField = forwardRef<
   HTMLInputElement,
@@ -55,7 +46,7 @@ export const RegisterTextField = forwardRef<
   return (
     <div>
       <div
-        className={cn(registerFieldShell, error && "ring-2 ring-theme-negative")}
+        className={cn(authFieldShell, error && "ring-2 ring-theme-negative")}
       >
         <input
           ref={ref}
@@ -65,24 +56,24 @@ export const RegisterTextField = forwardRef<
           autoComplete={autoComplete}
           maxLength={maxLength}
           inputMode={inputMode}
-          className={registerInputInner}
+          className={authInputInner}
           placeholder=" "
           aria-invalid={!!error}
           aria-describedby={
             error ? `${id}-err` : helperText ? `${id}-help` : undefined
           }
         />
-        <label htmlFor={id} className={floatingLabelClass}>
+        <label htmlFor={id} className={authFloatingLabelClass}>
           {label}
         </label>
       </div>
       {helperText && !error && (
-        <p id={`${id}-help`} className={helperClass}>
+        <p id={`${id}-help`} className={authHelperClass}>
           {helperText}
         </p>
       )}
       {error && (
-        <p id={`${id}-err`} className={errorTextClass}>
+        <p id={`${id}-err`} className={authErrorTextClass}>
           {error}
         </p>
       )}
@@ -111,7 +102,7 @@ export const RegisterPasswordField = forwardRef<
     <div>
       <div
         className={cn(
-          registerFieldShell,
+          authFieldShell,
           error && "ring-2 ring-theme-negative",
         )}
       >
@@ -122,20 +113,20 @@ export const RegisterPasswordField = forwardRef<
           type={show ? "text" : "password"}
           autoComplete={autoComplete}
           maxLength={maxLength ?? 20}
-          className={cn(registerInputInner, "pr-14")}
+          className={cn(authInputInner, "pr-14")}
           placeholder=" "
           aria-invalid={!!error}
           aria-describedby={
             error ? `${id}-err` : helperText ? `${id}-help` : undefined
           }
         />
-        <label htmlFor={id} className={floatingLabelClass}>
+        <label htmlFor={id} className={authFloatingLabelClass}>
           {label}
         </label>
         <button
           type="button"
           tabIndex={-1}
-          className="absolute right-2 top-1/2 -translate-y-1/2 flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-[#6a6a6a] hover:bg-black/5 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2DB400]"
+          className="absolute right-2 top-1/2 -translate-y-1/2 flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-[#6a6a6a] hover:bg-black/5 hover:text-black focus:outline-none focus-visible:ring-2 focus-visible:ring-theme-accent"
           onClick={() => setShow((p) => !p)}
           aria-label={show ? "비밀번호 숨기기" : "비밀번호 보기"}
         >
@@ -143,12 +134,12 @@ export const RegisterPasswordField = forwardRef<
         </button>
       </div>
       {helperText && !error && (
-        <p id={`${id}-help`} className={helperClass}>
+        <p id={`${id}-help`} className={authHelperClass}>
           {helperText}
         </p>
       )}
       {error && (
-        <p id={`${id}-err`} className={errorTextClass}>
+        <p id={`${id}-err`} className={authErrorTextClass}>
           {error}
         </p>
       )}
@@ -235,10 +226,7 @@ export function RegisterUsernameField({
   return (
     <div>
       <div
-        className={cn(
-          "flex min-h-[3.25rem] items-center gap-2 rounded-[10px] border-0 bg-[#F2F2F2] pl-0 pr-2 py-2 shadow-none transition-[box-shadow] focus-within:ring-2 focus-within:ring-[#2DB400]/40",
-          error && "ring-2 ring-theme-negative",
-        )}
+        className={cn(authUsernameRowShell, error && "ring-2 ring-theme-negative")}
       >
         <div className="relative min-w-0 flex-1 px-4">
           <input
@@ -248,12 +236,12 @@ export function RegisterUsernameField({
             autoComplete="username"
             maxLength={20}
             onInput={onInput}
-            className={cn(registerInputInner, "pr-2")}
+            className={cn(authInputInner, "pr-2")}
             placeholder=" "
             aria-invalid={!!error}
             aria-describedby={duplicateHint ? hintId : undefined}
           />
-          <label htmlFor={id} className={floatingLabelClass}>
+          <label htmlFor={id} className={authFloatingLabelClass}>
             {label}
           </label>
         </div>
@@ -266,12 +254,12 @@ export function RegisterUsernameField({
         </button>
       </div>
       {duplicateHint && (
-        <p id={hintId} className={cn(helperClass, "text-[#2DB400]")}>
+        <p id={hintId} className={cn(authHelperClass, "text-theme-accent")}>
           {duplicateHint}
         </p>
       )}
-      {helperText && <p className={helperClass}>{helperText}</p>}
-      {error && <p className={errorTextClass}>{error}</p>}
+      {helperText && <p className={authHelperClass}>{helperText}</p>}
+      {error && <p className={authErrorTextClass}>{error}</p>}
     </div>
   );
 }

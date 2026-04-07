@@ -16,17 +16,6 @@ export default function KcPage(props: { kcContext: KcContext }) {
   const { kcContext } = props;
   const { i18n } = useI18n({ kcContext });
 
-  const headerTitle =
-    kcContext.pageId === "login.ftl"
-      ? "로그인"
-      : kcContext.pageId === "register.ftl"
-        ? "회원가입"
-        : kcContext.pageId === "login-reset-password.ftl"
-          ? "비밀번호 찾기"
-          : kcContext.pageId === "login-verify-email.ftl"
-            ? "이메일 인증"
-            : String(kcContext.pageId);
-
   const mobileBodyClass = "kc-mobile min-h-screen bg-white";
 
   switch (kcContext.pageId) {
@@ -37,7 +26,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
           i18n={i18n}
           doUseDefaultCss={false}
           bodyClassName={mobileBodyClass}
-          headerNode={headerTitle}
+          headerNode={null}
         >
           <LoginView kcContext={kcContext} />
         </Template>
@@ -61,7 +50,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
           i18n={i18n}
           doUseDefaultCss={false}
           bodyClassName={mobileBodyClass}
-          headerNode={headerTitle}
+          headerNode={null}
         >
           <PasswordView kcContext={kcContext} />
         </Template>
@@ -73,7 +62,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
           i18n={i18n}
           doUseDefaultCss={false}
           bodyClassName={mobileBodyClass}
-          headerNode={headerTitle}
+          headerNode={null}
         >
           <EmailView kcContext={kcContext} />
         </Template>

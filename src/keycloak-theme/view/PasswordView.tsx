@@ -1,5 +1,11 @@
 import type { KcContext } from "../login/KcContext";
-import { AuthFooter, LoginIdInput, PrimaryButton } from "./components";
+import { loginMessagesKo } from "../login/loginMessages";
+import {
+  AuthFooter,
+  AuthPageHeading,
+  LoginIdInput,
+  PrimaryButton,
+} from "./components";
 
 type PasswordKcContext = Extract<
   KcContext,
@@ -11,11 +17,8 @@ interface PasswordViewProps {
 }
 
 export function PasswordView({ kcContext }: PasswordViewProps) {
-  const { url, realm, messagesPerField } = kcContext;
-  const usernameLabel =
-    "loginWithEmailAllowed" in realm && realm.loginWithEmailAllowed
-      ? "이메일"
-      : "사용자 이름";
+  const { url, messagesPerField } = kcContext;
+  const usernameLabel = "휴대폰 번호";
   const error = messagesPerField.existsError("username")
     ? messagesPerField.getFirstError("username")
     : undefined;
@@ -25,23 +28,25 @@ export function PasswordView({ kcContext }: PasswordViewProps) {
 
   return (
     <>
-      <p className="mb-4 text-sm text-theme-text-sub">
-        {"duplicateEmailsAllowed" in realm && realm.duplicateEmailsAllowed
-          ? "사용자 이름 또는 이메일 주소를 입력하시면 새 비밀번호 생성 방법을 안내해 드립니다."
-          : "이메일 주소를 입력하시면 새 비밀번호 생성 방법을 안내해 드립니다."}
+      <AuthPageHeading
+        title="비밀번호 재설정"
+        subtitle={loginMessagesKo.pageSubtitlePasswordReset}
+      />
+      <p className="mb-4 text-[15px] leading-6 text-theme-text-sub">
+        휴대폰 번호를 입력하시면 비밀번호 재설정 방법을 안내해 드립니다.
       </p>
       <form
         id="kc-reset-password-form"
         action={urlExt.loginAction}
         method="post"
-        className="space-y-2"
+        className="space-y-3"
       >
         <LoginIdInput
           id="username"
           name="username"
           label={usernameLabel}
           placeholder={usernameLabel}
-          autoComplete="username"
+          autoComplete="tel"
           required
           error={error}
         />
@@ -50,7 +55,7 @@ export function PasswordView({ kcContext }: PasswordViewProps) {
       <AuthFooter>
         <a
           href={loginUrl}
-          className="text-theme-text-sub no-underline hover:text-theme-primary"
+          className="text-theme-text-sub no-underline hover:text-theme-accent"
         >
           로그인으로 돌아가기
         </a>

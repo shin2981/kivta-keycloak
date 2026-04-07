@@ -53,7 +53,6 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
   }
 
   const isLoginPage = kcContext.pageId === "login.ftl";
-  const isRegisterPage = kcContext.pageId === "register.ftl";
   const registrationUrl =
     isLoginPage && "registrationUrl" in url ? url.registrationUrl : undefined;
   const loginResetCredentialsUrl =
@@ -143,7 +142,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
               "mb-4 rounded border px-3 py-2 text-sm",
               message?.type === "error" && "border-theme-negative bg-red-50 text-theme-negative",
               message?.type === "success" && "border-green-600 bg-green-50 text-green-800",
-              message?.type === "info" && "border-theme-primary bg-blue-50 text-theme-primary",
+              message?.type === "info" && "border-theme-accent bg-emerald-50 text-theme-accent",
               message?.type === "warning" && "border-amber-500 bg-amber-50 text-amber-800",
             )}
           >
@@ -167,7 +166,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             <a
               href="#"
               id="try-another-way"
-              className="text-sm text-theme-primary hover:text-theme-primary-dark hover:underline"
+              className="text-[15px] font-medium text-theme-accent hover:text-theme-accent-dark hover:underline"
               onClick={(event) => {
                 document.forms[
                   "kc-select-try-another-way-form" as never
@@ -205,7 +204,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
     >
       {isLoginPage ? (
         <LoginLayout
-          title={typeof headerNode === "string" ? headerNode : "로그인"}
+          title={typeof headerNode === "string" ? headerNode : undefined}
           registrationUrl={registrationUrl}
           loginResetCredentialsUrl={loginResetCredentialsUrl}
           socialProvidersNode={socialProvidersNode}
@@ -219,10 +218,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
           className={clsx(
             "w-full min-w-0 max-w-full",
             "px-4 pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] pt-[max(1.25rem,env(safe-area-inset-top,0px))] sm:px-6 sm:pt-6",
-            "md:mx-auto md:pb-10 md:pt-8",
-            isRegisterPage
-              ? "md:max-w-[min(100%,560px)] lg:max-w-[600px]"
-              : "md:max-w-[400px] lg:max-w-[440px]",
+            "md:mx-auto md:max-w-[min(100%,560px)] md:pb-10 md:pt-8 lg:max-w-[600px]",
           )}
         >
           <div className="mb-5 flex justify-center sm:mb-6">

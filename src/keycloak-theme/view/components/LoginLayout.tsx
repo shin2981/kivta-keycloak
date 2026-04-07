@@ -30,7 +30,7 @@ export function LoginLayout({
       className={clsx(
         "w-full min-w-0 max-w-full",
         "px-4 pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] pt-[max(1.25rem,env(safe-area-inset-top,0px))] sm:px-6 sm:pt-6",
-        "md:mx-auto md:max-w-[400px] md:pb-10 md:pt-8 lg:max-w-[440px]",
+        "md:mx-auto md:max-w-[min(100%,560px)] md:pb-10 md:pt-8 lg:max-w-[600px]",
       )}
     >
       <div className="mb-4 flex justify-center sm:mb-5">
@@ -57,19 +57,7 @@ export function LoginLayout({
               <>
                 <a
                   href={loginResetCredentialsUrl}
-                  className="text-theme-text-sub no-underline hover:text-theme-primary"
-                >
-                  {loginMessagesKo.findId}
-                </a>
-                <i
-                  aria-hidden
-                  className="mx-0.5 text-theme-gray40 not-italic"
-                >
-                  |
-                </i>
-                <a
-                  href={loginResetCredentialsUrl}
-                  className="text-theme-text-sub no-underline hover:text-theme-primary"
+                  className="text-theme-text-sub no-underline hover:text-theme-accent"
                 >
                   {loginMessagesKo.findPassword}
                 </a>
@@ -84,7 +72,7 @@ export function LoginLayout({
             {registrationUrl && (
               <a
                 href={registrationUrl}
-                className="text-theme-text-sub no-underline hover:text-theme-primary"
+                className="text-theme-text-sub no-underline hover:text-theme-accent"
               >
                 {loginMessagesKo.signUp}
               </a>

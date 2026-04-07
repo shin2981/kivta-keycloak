@@ -2,11 +2,13 @@ import { useCallback, useMemo, useState, type FormEvent } from "react";
 import type { KcContext } from "../login/KcContext";
 import {
   AuthFooter,
+  AuthPageHeading,
   PrimaryButton,
   RegisterPasswordField,
   RegisterTextField,
   RegisterUsernameField,
 } from "./components";
+import { loginMessagesKo } from "../login/loginMessages";
 import {
   isValidEmail,
   isValidPassword,
@@ -129,15 +131,10 @@ export function RegisterView({ kcContext }: RegisterViewProps) {
 
   return (
     <>
-      <div className="mb-6 text-left">
-        <h1
-          id="kc-page-title"
-          className="text-[22px] font-bold leading-tight tracking-tight text-black"
-        >
-          환영합니다!
-        </h1>
-        <div className="mt-4 h-px w-full bg-[#E8E8E8]" />
-      </div>
+      <AuthPageHeading
+        title="환영합니다!"
+        subtitle={loginMessagesKo.pageSubtitleRegister}
+      />
 
       <form
         id="kc-register-form"
@@ -171,7 +168,6 @@ export function RegisterView({ kcContext }: RegisterViewProps) {
           autoComplete="email"
           error={err("email")}
           maxLength={254}
-          helperText="* 이메일 인증에 사용되므로 정확히 입력해 주세요."
         />
 
         {!realm.registrationEmailAsUsername && (
@@ -206,22 +202,19 @@ export function RegisterView({ kcContext }: RegisterViewProps) {
         />
 
         {globalError && (
-          <p className="text-[13px] leading-snug text-theme-negative">
+          <p className="text-[14px] leading-snug text-theme-negative">
             {globalError}
           </p>
         )}
 
-        <PrimaryButton
-          className="mt-2 rounded-[10px] bg-black py-3.5 text-[15px] font-semibold text-white hover:bg-neutral-900 focus:ring-black"
-          type="submit"
-        >
+        <PrimaryButton className="mt-2" type="submit">
           가입
         </PrimaryButton>
       </form>
       <AuthFooter>
         <a
           href={loginUrl}
-          className="text-theme-text-sub no-underline hover:text-theme-primary"
+          className="text-theme-text-sub no-underline hover:text-theme-accent"
         >
           로그인으로 돌아가기
         </a>
