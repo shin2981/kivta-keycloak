@@ -7,9 +7,27 @@ import { useSetClassName } from "keycloakify/tools/useSetClassName";
 import { useInitialize } from "keycloakify/login/Template.useInitialize";
 import type { I18n } from "./i18n";
 import type { KcContext } from "./KcContext";
-import { LoginLayout } from "../view/components";
+import { LinkButton, LoginLayout } from "../view/components";
 import logo from "../assets/logo.png";
 import { suppressLoginCredentialTopMessage } from "./loginCredentialError";
+
+function stripHtml(s: string): string {
+  return s
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function isAlreadyLoggedInSummary(summary: string | undefined): boolean {
+  if (!summary) return false;
+  const raw = stripHtml(summary);
+  const t = raw.toLowerCase();
+  if (t.includes("already") && t.includes("logged in")) return true;
+  if (t.includes("already") && t.includes("authenticated")) return true;
+  if (raw.includes("이미") && raw.includes("로그인")) return true;
+  return false;
+}
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
   const {
@@ -51,6 +69,49 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
   if (!isReadyToRender) {
     return null;
+  }
+
+  const alreadyLoggedIn = isAlreadyLoggedInSummary(message?.summary);
+  const kivtaHomeUrl = "https://kivta.raven.kr";
+
+  if (alreadyLoggedIn) {
+    return (
+      <div
+        className={clsx(
+          kcClsx("kcLoginClass"),
+          "flex min-h-dvh min-w-0 max-w-full flex-col justify-center",
+        )}
+      >
+        <div
+          id="wrapper"
+          className={clsx(
+            "w-full min-w-0 max-w-full",
+            "px-4 pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] pt-[max(1.25rem,env(safe-area-inset-top,0px))] sm:px-6 sm:pt-6",
+            "md:mx-auto md:max-w-[min(100%,560px)] md:pb-10 md:pt-8 lg:max-w-[600px]",
+          )}
+        >
+          <div className="mb-5 flex justify-center sm:mb-6">
+            <span aria-hidden>
+              <img
+                src={logo}
+                alt="한국산업훈련협회"
+                className="max-h-10 w-auto sm:max-h-11"
+              />
+            </span>
+          </div>
+          <div className="rounded-xl bg-theme-surface p-4 sm:p-5 md:p-6 lg:p-8">
+            <h1 className="mb-3 text-center text-xl font-semibold text-theme-text">
+              이미 로그인되어 있습니다
+            </h1>
+            <p className="text-center text-[15px] leading-6 text-theme-text-sub">
+              KIVTA로 돌아가려면{" "}
+              <LinkButton href={kivtaHomeUrl}>여기를 클릭</LinkButton>{" "}
+              해 주세요.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const isLoginPage = kcContext.pageId === "login.ftl";
