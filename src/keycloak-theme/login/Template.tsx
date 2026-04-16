@@ -72,7 +72,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
   }
 
   const alreadyLoggedIn = isAlreadyLoggedInSummary(message?.summary);
-  const kivtaHomeUrl = "https://kivta.raven.kr";
+  const kivtaHomeUrl =
+    import.meta.env.VITE_KIVTA_HOME_URL ?? "https://kivta.raven.kr";
 
   if (alreadyLoggedIn) {
     return (
