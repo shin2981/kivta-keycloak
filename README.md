@@ -13,7 +13,7 @@
 ## 사전 요구 사항
 
 - Node.js 18+
-- (JAR 빌드 시) [Apache Maven](https://maven.apache.org/)  
+- (JAR 빌드 시) [Apache Maven](https://maven.apache.org/)
   - macOS: `brew install mvn`
 
 ## 설치 및 실행
@@ -70,6 +70,18 @@ npm run keycloak:build
      - Keycloak 설치 경로의 `providers/`에 JAR를 복사한 뒤 Keycloak을 재시작합니다.
 3. Admin 콘솔 → Realm → **Realm settings** → **Themes**
    - **Login theme**: `kivta-theme` 선택 후 저장.
+
+#### 현재 프로젝트 루트 디렉토리에서 아래 명령어 실행.
+
+```bash
+scp ./dist_keycloak/keycloak-theme-for-kc-* woong@linux-homeserver:/var/keycloak/providers/
+```
+
+#### 서버 들어가서 실행
+
+```bash
+docker restart keycloak
+```
 
 ### 2. 테마 디렉터리만 사용하는 경우
 
