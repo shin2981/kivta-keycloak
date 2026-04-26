@@ -1,5 +1,10 @@
 name: Build and Deploy Keycloak Theme JAR
 
+run-name: >
+  ${{ github.event_name == 'workflow_dispatch' && '🛠️ 수동 릴리즈 실행' || '🚀 릴리즈 자동 생성' }}
+  #${{ github.run_number }}
+  by @${{ github.actor }}
+
 on:
   push:
     branches:
