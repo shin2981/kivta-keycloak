@@ -72,8 +72,9 @@ jobs:
           username: ${{ secrets.KEYCLOAK_USER }}
           password: ${{ secrets.KEYCLOAK_PASSWORD }}
           port: ${{ secrets.KEYCLOAK_PORT || 22 }}
-          source: ./artifact/keycloak-theme-*.jar
+          source: artifact/keycloak-theme-*.jar
           target: /var/keycloak/providers/
+          strip_components: 1
 
       - name: Restart keycloak container
         uses: appleboy/ssh-action@v1.0.3
