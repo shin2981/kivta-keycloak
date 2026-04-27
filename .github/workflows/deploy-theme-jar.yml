@@ -75,6 +75,7 @@ jobs:
           source: artifact/keycloak-theme-*.jar
           target: /var/keycloak/providers/
           strip_components: 1
+          overwrite: true
 
       - name: Restart keycloak container
         uses: appleboy/ssh-action@v1.0.3
